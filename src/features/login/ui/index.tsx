@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useLoginMutation } from '../../../shared';
+import { selectors, useAppSelector, useLoginMutation } from '../../../shared';
 import { AuthContext } from '../../../shared';
+import { UI } from '../../../shared';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 interface InputsForm {
   email: string;
@@ -9,6 +11,9 @@ interface InputsForm {
 }
 
 export const LoginForm: React.FC = () => {
+  const { CustomInput, CustomForm, CustomSubmit, CustomLabel } = UI;
+  const token = useAppSelector(selectors.authSelectors.selectToken);
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm<InputsForm>();
   const { logIn } = useContext(AuthContext);
 
@@ -21,23 +26,26 @@ export const LoginForm: React.FC = () => {
         throw new Error('InvalidLogin');
       }
       logIn(response.data);
+      navigate('/');
     } catch (e) {
       console.log(e);
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="email">Email</label>
-      <input
+  return token ? (
+    <Navigate to="/" />
+  ) : (
+    <CustomForm onSubmit={handleSubmit(onSubmit)}>
+      <CustomLabel htmlFor="email">Email</CustomLabel>
+      <CustomInput
         {...register('email', { required: true })}
         type="email"
         name="email"
         id="email"
         required
       />
-      <label htmlFor="password">Password</label>
-      <input
+      <CustomLabel htmlFor="password">Password</CustomLabel>
+      <CustomInput
         {...register('password', {
           required: true,
           minLength: 8,
@@ -48,7 +56,7 @@ export const LoginForm: React.FC = () => {
         id="password"
         required
       />
-      <button type="submit">Log In</button>
-    </form>
+      <CustomSubmit type="submit">Log In</CustomSubmit>
+    </CustomForm>
   );
 };
