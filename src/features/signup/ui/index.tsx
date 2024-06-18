@@ -4,8 +4,8 @@ import { useSignupMutation } from '../../../shared';
 import { AuthContext } from '../../../shared';
 
 interface InputsForm {
-  email: string;
-  password: string;
+  signupEmail: string;
+  signupPassword: string;
   fullName: string;
 }
 
@@ -34,22 +34,28 @@ export const SignupForm: React.FC = () => {
         {...register('fullName', { required: true })}
         type="text"
         name="fullName"
+        id="fullName"
+        required
       />
-      <label htmlFor="email">Email</label>
+      <label htmlFor="signupEmail">Email</label>
       <input
-        {...register('email', { required: true })}
+        {...register('signupEmail', { required: true })}
         type="email"
         name="email"
+        id="signupEmail"
+        required
       />
-      <label htmlFor="password">Password</label>
+      <label htmlFor="signupPassword">Password</label>
       <input
-        {...register('password', {
+        {...register('signupPassword', {
           required: true,
           minLength: 8,
           maxLength: 26,
         })}
         type="password"
         name="password"
+        id="signupPassword"
+        required
       />
       <button type="submit">Sign Up</button>
     </form>

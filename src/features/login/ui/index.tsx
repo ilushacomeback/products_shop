@@ -33,6 +33,8 @@ export const LoginForm: React.FC = () => {
         {...register('email', { required: true })}
         type="email"
         name="email"
+        id="email"
+        required
       />
       <label htmlFor="password">Password</label>
       <input
@@ -43,6 +45,8 @@ export const LoginForm: React.FC = () => {
         })}
         type="password"
         name="password"
+        id="password"
+        required
       />
       <button type="submit">Log In</button>
     </form>
