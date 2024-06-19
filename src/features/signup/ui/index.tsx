@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSignupMutation } from '../../../shared';
 import { AuthContext } from '../../../shared';
+import { UI } from '../../../shared';
 
 interface InputsForm {
   signupEmail: string;
@@ -10,6 +11,7 @@ interface InputsForm {
 }
 
 export const SignupForm: React.FC = () => {
+  const { CustomInput, CustomForm, CustomSubmit, CustomLabel } = UI;
   const { register, handleSubmit } = useForm<InputsForm>();
   const { logIn } = useContext(AuthContext);
 
@@ -28,25 +30,25 @@ export const SignupForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="fullName">Name</label>
-      <input
+    <CustomForm onSubmit={handleSubmit(onSubmit)}>
+      <CustomLabel htmlFor="fullName">Name</CustomLabel>
+      <CustomInput
         {...register('fullName', { required: true })}
         type="text"
         name="fullName"
         id="fullName"
         required
       />
-      <label htmlFor="signupEmail">Email</label>
-      <input
+      <CustomLabel htmlFor="signupEmail">Email</CustomLabel>
+      <CustomInput
         {...register('signupEmail', { required: true })}
         type="email"
         name="email"
         id="signupEmail"
         required
       />
-      <label htmlFor="signupPassword">Password</label>
-      <input
+      <CustomLabel htmlFor="signupPassword">Password</CustomLabel>
+      <CustomInput
         {...register('signupPassword', {
           required: true,
           minLength: 8,
@@ -57,7 +59,7 @@ export const SignupForm: React.FC = () => {
         id="signupPassword"
         required
       />
-      <button type="submit">Sign Up</button>
-    </form>
+      <CustomSubmit type="submit">Sign Up</CustomSubmit>
+    </CustomForm>
   );
 };

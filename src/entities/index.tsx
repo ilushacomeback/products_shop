@@ -1,0 +1,1 @@
+export { WelcomeText } from './login/ui/welcomeText'
