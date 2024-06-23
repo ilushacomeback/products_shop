@@ -1,35 +1,49 @@
 import React, { useContext } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useSignupMutation } from '../../../shared';
-import { AuthContext } from '../../../shared';
-import { UI } from '../../../shared';
+import {
+  selectors,
+  useAppSelector,
+  useSignupMutation,
+  AuthContext,
+  UI,
+} from '../../../shared';
 
 interface InputsForm {
-  signupEmail: string;
-  signupPassword: string;
+  email: string;
+  password: string;
   fullName: string;
 }
 
 export const SignupForm: React.FC = () => {
+  const navigate = useNavigate();
   const { CustomInput, CustomForm, CustomSubmit, CustomLabel } = UI;
   const { register, handleSubmit } = useForm<InputsForm>();
   const { logIn } = useContext(AuthContext);
+  const token = useAppSelector(selectors.authSelectors.selectToken);
 
-  const [signup] = useSignupMutation();
+  const [signup, { error }] = useSignupMutation();
 
   const onSubmit: SubmitHandler<InputsForm> = async (data) => {
     try {
       const response = await signup(data);
-      if (response?.error) {
-        throw new Error('notUniqUser');
+      if (error) {
+        if ('status' in error && error.status === 401) {
+          throw new Error('notUniqUser');
+        } else {
+          throw new Error('Network_Error');
+        }
       }
       logIn(response.data);
+      navigate('/');
     } catch (e) {
       console.log(e);
     }
   };
 
-  return (
+  return token ? (
+    <Navigate to="/" />
+  ) : (
     <CustomForm onSubmit={handleSubmit(onSubmit)}>
       <CustomLabel htmlFor="fullName">Name</CustomLabel>
       <CustomInput
@@ -39,24 +53,24 @@ export const SignupForm: React.FC = () => {
         id="fullName"
         required
       />
-      <CustomLabel htmlFor="signupEmail">Email</CustomLabel>
+      <CustomLabel htmlFor="email">Email</CustomLabel>
       <CustomInput
-        {...register('signupEmail', { required: true })}
+        {...register('email', { required: true })}
         type="email"
         name="email"
-        id="signupEmail"
+        id="email"
         required
       />
-      <CustomLabel htmlFor="signupPassword">Password</CustomLabel>
+      <CustomLabel htmlFor="password">Password</CustomLabel>
       <CustomInput
-        {...register('signupPassword', {
+        {...register('password', {
           required: true,
           minLength: 8,
           maxLength: 26,
         })}
         type="password"
         name="password"
-        id="signupPassword"
+        id="password"
         required
       />
       <CustomSubmit type="submit">Sign Up</CustomSubmit>

@@ -5,4 +5,8 @@ export const CustomSubmit = styled.button`
     margin-top: 10px;
     border-radius: 5px;
     background: #39a2fabf;
+    transition: background 1s;
+    &:hover {
+        background: #74c0ffbf;
+    }
 `
