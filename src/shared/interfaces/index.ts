@@ -12,3 +12,10 @@ export interface ResponseData {
     email: string;
   };
 }
+
+export interface Product {
+  name: string,
+  description: string,
+  price: string,
+  image: string,
+}
