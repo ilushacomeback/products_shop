@@ -8,7 +8,7 @@ body {
   height: 100vh;
   padding: 0;
   margin: 0;
-  background-color: #54545424;
+  background-color: rgb(216, 216, 216)
 }
 * {
   padding: 0px;
