@@ -1,14 +1,12 @@
 import { AuthState } from '../../interfaces/index';
 
 export const getInitialState = (): AuthState => {
-  const user = localStorage.getItem('user');
+  // const user = localStorage.getItem('user');
+  const user: string = decodeURIComponent(document.cookie).split('user=')[1];
+
   if (user) {
-    const data = JSON.parse(user);
-    return {
-      token: data.token,
-      id: Number(data.id),
-      fullName: data.fullName,
-    };
+    return JSON.parse(user);
   }
+  
   return { token: null, id: null, fullName: null };
 };

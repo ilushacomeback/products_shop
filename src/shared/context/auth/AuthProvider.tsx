@@ -4,19 +4,22 @@ import { useAppDispatch } from '../../hooks/index';
 import { actions } from '../../model/store';
 import { AuthContext } from './AuthContext';
 
-
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const logIn = (payload: ResponseData): void => {
     const { id, fullName } = payload.data;
     const normalizeData: AuthState = { token: payload.token, id, fullName };
-    localStorage.setItem('user', JSON.stringify(normalizeData));
+    document.cookie = `${encodeURIComponent('user')}=${encodeURIComponent(
+      JSON.stringify(normalizeData)
+    )};samesite=strict;max-age=604800`;
+    // localStorage.setItem('user', JSON.stringify(normalizeData));
   };
 
   const logOut = (): void => {
-    localStorage.removeItem('user');
-    dispatch(actions.logout())
+    document.cookie = `${encodeURIComponent('user')}=;max-age=0`;
+    // localStorage.removeItem('user');
+    dispatch(actions.logout());
   };
 
   return (
