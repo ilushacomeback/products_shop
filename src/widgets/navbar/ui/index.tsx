@@ -10,7 +10,7 @@ import {
 import { useAppSelector, selectors } from '../../../shared';
 import { AuthContext } from '../../../shared';
 
-const ButtonsForGuest: React.FC = () => {
+const ButtonsForGuest = () => {
   return (
     <>
       <MenuItem>
@@ -23,7 +23,7 @@ const ButtonsForGuest: React.FC = () => {
   );
 };
 
-const ButtonsForUser: React.FC = () => {
+const ButtonsForUser = () => {
   const { logOut } = useContext(AuthContext);
 
   return (

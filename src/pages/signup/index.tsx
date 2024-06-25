@@ -1,6 +1,6 @@
 import React from 'react';
 import { Registration } from '../../widgets';
 
-export const Signup: React.FC = () => {
+export const Signup = () => {
   return <Registration />;
 };

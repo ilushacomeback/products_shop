@@ -1,11 +1,10 @@
 import React from 'react';
 import { Authentication } from '../../widgets';
 
-export const Login: React.FC = () => {
+export const Login = () => {
   return (
     <>
       <Authentication />
-      
     </>
   );
 };

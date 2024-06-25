@@ -18,11 +18,11 @@ const Li = styled.li`
 `;
 
 const Span = styled.span`
-    font-weight: 800;
-    font-size: 24px;
-`
+  font-weight: 800;
+  font-size: 24px;
+`;
 
-export const CardProduct: React.FC<ProductProps> = ({ product }) => {
+export const CardProduct = ({ product }: ProductProps) => {
   const { name, price, image } = product;
   const { CustomSubmit } = UI;
 

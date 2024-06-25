@@ -3,7 +3,7 @@ import { WelcomeText } from '../../../entities';
 import { LoginForm } from '../../../features';
 import { UI } from '../../../shared';
 
-export const Authentication: React.FC = () => {
+export const Authentication = () => {
   const { CustomMain } = UI;
   
   return (

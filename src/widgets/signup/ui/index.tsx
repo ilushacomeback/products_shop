@@ -2,7 +2,7 @@ import React from 'react';
 import { SignupForm } from '../../../features';
 import { CustomMain } from '../../../shared/ui-kit';
 
-export const Registration: React.FC = () => {
+export const Registration = () => {
   return (
     <CustomMain>
       <SignupForm />

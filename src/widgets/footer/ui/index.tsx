@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
   return (
     <div style={{ background: 'black' }}>
       <p>

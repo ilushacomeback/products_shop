@@ -18,7 +18,7 @@ const CustomBox = styled(Box)`
   }
 `;
 
-export const WelcomeText: React.FC = () => {
+export const WelcomeText = () => {
   return (
     <CustomBox>
       <h1 style={{ fontSize: '16px' }}>WELCOME</h1>

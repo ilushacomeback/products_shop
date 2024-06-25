@@ -10,6 +10,7 @@ interface ApiRoutes {
     login: string,
     signup: string,
     products: string
+    categories: string
 }
 
 export const staticRoutes: StaticRoutes = {
@@ -24,4 +25,5 @@ export const apiRoutes: ApiRoutes = {
     login: '/auth',
     signup: '/register',
     products: '/products',
+    categories: '/categories'
 }

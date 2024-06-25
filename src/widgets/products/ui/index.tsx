@@ -11,7 +11,7 @@ const Ul = styled.ul`
   padding: 10px 20px;
 `;
 
-export const Products: React.FC = () => {
+export const Products = () => {
   const { data }: { data?: Product[] } = useGetProductsQuery(undefined);
 
   useEffect(() => {}, []);

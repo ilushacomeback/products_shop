@@ -17,7 +17,7 @@ const LinkRegistration = styled(Link)`
   text-align: center;
 `;
 
-export const LoginForm: React.FC = () => {
+export const LoginForm = () => {
   const { CustomInput, CustomForm, CustomSubmit, CustomLabel } = UI;
   const token = useAppSelector(selectors.authSelectors.selectToken);
   const navigate = useNavigate();
