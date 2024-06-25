@@ -28,7 +28,7 @@ module.exports = {
   mode,
   target,
   plugins,
-  entry: './src/app/index.tsx',
+  entry: path.resolve(__dirname, 'src', 'app', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'build'),
     assetModuleFilename: 'assets/[hash][ext][query]',
