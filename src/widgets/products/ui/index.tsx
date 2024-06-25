@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { Product, useGetProductsQuery } from '../../../shared';
-import { CardProduct } from '../../../entities';
 import styled from 'styled-components';
+import { Product, useGetProductsQuery } from '@/shared';
+import { CardProduct } from '@/entities';
 
 const Ul = styled.ul`
   display: flex;

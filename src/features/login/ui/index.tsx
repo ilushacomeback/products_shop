@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { selectors, useAppSelector, useLoginMutation } from '../../../shared';
-import { AuthContext } from '../../../shared';
-import { UI } from '../../../shared';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { selectors, useAppSelector, useLoginMutation } from '@/shared';
+import { AuthContext } from '@/shared';
+import { UI } from '@/shared';
 
 interface InputsForm {
   email: string;

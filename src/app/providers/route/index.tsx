@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home, Account, Login, Signup } from '../../../pages';
-import { staticRoutes as routes } from '../../../shared';
+import { Home, Account, Login, Signup } from '@/pages';
+import { staticRoutes as routes } from '@/shared';
 
 export const RouterProvider: React.FC<PropsWithChildren> = ({ children }) => {
   return (

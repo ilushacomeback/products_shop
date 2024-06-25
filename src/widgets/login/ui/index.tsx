@@ -1,7 +1,6 @@
-import React from 'react';
-import { WelcomeText } from '../../../entities';
-import { LoginForm } from '../../../features';
-import { UI } from '../../../shared';
+import { WelcomeText } from '@/entities';
+import { LoginForm } from '@/features';
+import { UI } from '@/shared';
 
 export const Authentication = () => {
   const { CustomMain } = UI;

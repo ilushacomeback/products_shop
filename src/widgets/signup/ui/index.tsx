@@ -1,8 +1,8 @@
-import React from 'react';
-import { SignupForm } from '../../../features';
-import { CustomMain } from '../../../shared/ui-kit';
+import { SignupForm } from '@/features';
+import { UI } from '@/shared';
 
 export const Registration = () => {
+  const { CustomMain } = UI
   return (
     <CustomMain>
       <SignupForm />

@@ -1,5 +1,4 @@
-import React from 'react';
-import { Authentication } from '../../widgets';
+import { Authentication } from '@/widgets';
 
 export const Login = () => {
   return (

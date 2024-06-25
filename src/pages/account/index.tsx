@@ -1,5 +1,4 @@
-import React from 'react';
-import { selectors, useAppSelector } from '../../shared';
+import { selectors, useAppSelector } from '@/shared';
 import { Navigate } from 'react-router-dom';
 
 export const Account = () => {

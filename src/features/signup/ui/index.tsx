@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import {
@@ -7,7 +7,7 @@ import {
   useSignupMutation,
   AuthContext,
   UI,
-} from '../../../shared';
+} from '@/shared';
 
 interface InputsForm {
   email: string;
@@ -15,7 +15,7 @@ interface InputsForm {
   fullName: string;
 }
 
-export const SignupForm: React.FC = () => {
+export const SignupForm = () => {
   const navigate = useNavigate();
   const { CustomInput, CustomForm, CustomSubmit, CustomLabel } = UI;
   const { register, handleSubmit } = useForm<InputsForm>();

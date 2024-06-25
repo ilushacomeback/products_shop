@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import {
   NavbarContainer,
   Logo,
@@ -7,8 +7,8 @@ import {
   ResponsiveMenuItem,
   MenuItem,
 } from '../styled-component/index';
-import { useAppSelector, selectors } from '../../../shared';
-import { AuthContext } from '../../../shared';
+import { useAppSelector, selectors } from '@/shared';
+import { AuthContext } from '@/shared';
 
 const ButtonsForGuest = () => {
   return (
@@ -40,11 +40,11 @@ const ButtonsForUser = () => {
   );
 };
 
-const NavbarRight: React.FC<{ token: boolean }> = ({ token }) => {
+const NavbarRight = ({ token }: { token: boolean }) => {
   return token ? <ButtonsForUser /> : <ButtonsForGuest />;
 };
 
-export const Navbar: React.FC = () => {
+export const Navbar = () => {
   const token: boolean = !!useAppSelector(selectors.authSelectors.selectToken);
 
   return (

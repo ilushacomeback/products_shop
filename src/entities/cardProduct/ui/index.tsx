@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import type { Product } from '../../../shared';
-import { UI } from '../../../shared';
+import type { Product } from '@/shared';
+import { UI } from '@/shared';
 
 interface ProductProps {
   product: Product;
