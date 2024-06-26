@@ -1,10 +1,10 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { ResponseData, AuthState } from '../../interfaces/index';
 import { useAppDispatch } from '../../hooks/index';
 import { actions } from '../../model/store';
 import { AuthContext } from './AuthContext';
 
-export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
+export const AuthProvider = (props: PropsWithChildren) => {
   const dispatch = useAppDispatch();
 
   const logIn = (payload: ResponseData): void => {
@@ -24,7 +24,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ logOut, logIn }}>
-      {children}
+      {props.children}
     </AuthContext.Provider>
   );
 };

@@ -1,9 +1,12 @@
+import { useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import type { Product } from '@/shared';
-import { UI } from '@/shared';
+import { UI, ObserverContext } from '@/shared';
+import { callback, optionsObserver } from '../model/observer';
 
 interface ProductProps {
   product: Product;
+  isLast: boolean;
 }
 
 const Li = styled.li`
@@ -22,12 +25,25 @@ const Span = styled.span`
   font-size: 24px;
 `;
 
-export const CardProduct = ({ product }: ProductProps) => {
+export const CardProduct = ({ product, isLast }: ProductProps) => {
   const { name, price, image } = product;
   const { CustomSubmit } = UI;
+  const trackedItem = useRef(null);
+  const { nextPage } = useContext(ObserverContext);
+
+  const observer = new IntersectionObserver(
+    (entries, observer) => callback(entries, observer, nextPage),
+    optionsObserver
+  );
+
+  useEffect(() => {
+    if (isLast && trackedItem.current) {
+      observer.observe(trackedItem.current);
+    }
+  }, []);
 
   return (
-    <Li>
+    <Li ref={trackedItem}>
       <div>
         <img src={image} alt={name} />
         <h3>{name}</h3>

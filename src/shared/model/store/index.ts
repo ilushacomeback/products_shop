@@ -7,16 +7,25 @@ import {
   authSelectors,
 } from '../slices/authSlice';
 
+import {
+  productsReducer as products,
+  actions as productsActions,
+  productsSelectors,
+} from '../slices/products';
+
 export const actions = {
   ...authActions,
+  ...productsActions,
 };
 
 export const selectors = {
   authSelectors,
+  productsSelectors,
 };
 
 const reducer = combineReducers({
   auth,
+  products,
   [authApi.reducerPath]: authApi.reducer,
   [productsApi.reducerPath]: productsApi.reducer,
 });
