@@ -32,13 +32,13 @@ export const CardProduct = ({ product, isLast }: ProductProps) => {
   const observer = new IntersectionObserver(lazy, optionsObserver);
 
   useEffect(() => {
-    if (isLast && trackedItem.current) {
+    if (trackedItem.current) {
       observer.observe(trackedItem.current);
     }
   }, []);
 
   return (
-    <Li ref={trackedItem}>
+    <Li {...(isLast ? { ref: trackedItem } : {})}>
       <div>
         <img src={image} alt={name} />
         <h3>{name}</h3>
