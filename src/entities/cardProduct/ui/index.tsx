@@ -1,8 +1,6 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import type { Product } from '@/shared';
-import { UI, ObserverContext } from '@/shared';
-import { callback, optionsObserver } from '../model/observer';
+import { UI, useLazy, Product } from '@/shared';
 
 interface ProductProps {
   product: Product;
@@ -29,12 +27,9 @@ export const CardProduct = ({ product, isLast }: ProductProps) => {
   const { name, price, image } = product;
   const { CustomSubmit } = UI;
   const trackedItem = useRef(null);
-  const { nextPage } = useContext(ObserverContext);
+  const { lazy, optionsObserver } = useLazy();
 
-  const observer = new IntersectionObserver(
-    (entries, observer) => callback(entries, observer, nextPage),
-    optionsObserver
-  );
+  const observer = new IntersectionObserver(lazy, optionsObserver);
 
   useEffect(() => {
     if (isLast && trackedItem.current) {
