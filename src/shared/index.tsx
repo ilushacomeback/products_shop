@@ -1,6 +1,7 @@
 export { staticRoutes, apiRoutes } from './routes/index';
 export { useLoginMutation, useSignupMutation } from './api/auth';
 export { useGetProductQuery, useGetProductsQuery } from './api/products'
+export { useGetCategoriesQuery } from './api/categories'
 export { store, actions, selectors } from './model/store/index'
 export { useAppDispatch, useAppSelector, useAppStore } from './hooks/index'
 export { useLazy } from './hooks/useLazy'

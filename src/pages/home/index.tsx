@@ -1,5 +1,11 @@
 import { Products } from '@/widgets';
+import { Categories } from '@/features';
 
 export const Home = () => {
-  return <Products />;
+  return (
+    <div style={{ display: 'flex' }}>
+      <Categories />
+      <Products />
+    </div>
+  )
 };

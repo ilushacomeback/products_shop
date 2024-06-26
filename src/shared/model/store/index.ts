@@ -1,12 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { authApi } from '../../api/auth';
 import { productsApi } from '../../api/products';
+import { categoriesApi } from '../../api/categories';
 import {
   authReducer as auth,
   actions as authActions,
   authSelectors,
 } from '../slices/authSlice';
-
 import {
   productsReducer as products,
   actions as productsActions,
@@ -28,12 +28,17 @@ const reducer = combineReducers({
   products,
   [authApi.reducerPath]: authApi.reducer,
   [productsApi.reducerPath]: productsApi.reducer,
+  [categoriesApi.reducerPath]: categoriesApi.reducer,
 });
 
 export const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([authApi.middleware, productsApi.middleware]),
+    getDefaultMiddleware().concat([
+      authApi.middleware,
+      productsApi.middleware,
+      categoriesApi.middleware,
+    ]),
 });
 
 export type AppStore = typeof store;

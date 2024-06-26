@@ -8,7 +8,13 @@ export const productsApi = createApi({
   }),
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: (page) => `?page=${page}`,
+      query: (page, category = '') => {
+        const result = [`?page=${page}`];
+        if (category) {
+          result.push(`category=${category}`);
+        }
+        return result.join('&');
+      },
     }),
     getProduct: builder.query({
       query: (id) => `/${id}`,
@@ -17,7 +23,7 @@ export const productsApi = createApi({
       query: (data) => ({
         method: 'POST',
         body: data,
-        url: ''
+        url: '',
       }),
     }),
   }),
