@@ -11,9 +11,11 @@ const Ul = styled.ul`
 
 export const Products = () => {
   const page = useAppSelector(selectors.productsSelectors.selectCurrentPage);
-  useGetProductsQuery(page);
+  const category = useAppSelector(
+    selectors.productsSelectors.selectCurrentCategory
+  );
+  useGetProductsQuery({ page, category });
   const products = useAppSelector(selectors.productsSelectors.selectProducts);
-
   return !products ? (
     <div>loading...</div>
   ) : (

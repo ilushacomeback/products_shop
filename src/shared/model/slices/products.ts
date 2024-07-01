@@ -7,6 +7,7 @@ interface InitialState {
   products: Product[];
   page: number;
   totalPages: number;
+  category: string;
 }
 
 interface Response {
@@ -20,7 +21,12 @@ interface Response {
   };
 }
 
-const initialState: InitialState = { products: [], page: 1, totalPages: 1 };
+const initialState: InitialState = {
+  products: [],
+  page: 1,
+  totalPages: 1,
+  category: '',
+};
 
 const productsSlice = createSlice({
   name: 'productsSlice',
@@ -32,9 +38,10 @@ const productsSlice = createSlice({
       }
     },
     getCategory: (state, { payload }) => {
-      state.products = state.products.filter(
-        (product) => payload === product.category
-      );
+      if (payload === state.category) return;
+      state.products = [];
+      state.page = 1;
+      state.category = payload === 'all' ? '' : payload;
     },
   },
   extraReducers: (builder) => {
@@ -52,6 +59,7 @@ const productsSlice = createSlice({
 export const productsSelectors = {
   selectProducts: (state: RootState) => state.products.products,
   selectCurrentPage: (state: RootState) => state.products.page,
+  selectCurrentCategory: (state: RootState) => state.products.category,
 };
 export const productsReducer = productsSlice.reducer;
 export const { actions } = productsSlice;

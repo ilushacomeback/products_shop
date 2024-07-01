@@ -6,9 +6,10 @@ export const productsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${apiRoutes.baseUrl}/${apiRoutes.products}`,
   }),
+  keepUnusedDataFor: 0,
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: (page, category = '') => {
+      query: ({ page, category = '' }) => {
         const result = [`?page=${page}`];
         if (category) {
           result.push(`category=${category}`);
