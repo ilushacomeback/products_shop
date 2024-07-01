@@ -33,6 +33,7 @@ const authSlice = createSlice({
 
 export const authSelectors = {
   selectToken: (state: RootState) => state.auth.token,
+  selectId: (state: RootState) => state.auth.id
 };
 export const authReducer = authSlice.reducer;
 export const { actions } = authSlice;

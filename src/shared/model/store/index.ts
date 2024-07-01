@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { authApi } from '../../api/auth';
 import { productsApi } from '../../api/products';
 import { categoriesApi } from '../../api/categories';
+import { userApi } from '../../api/user';
 import {
   authReducer as auth,
   actions as authActions,
@@ -29,6 +30,7 @@ const reducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [productsApi.reducerPath]: productsApi.reducer,
   [categoriesApi.reducerPath]: categoriesApi.reducer,
+  [userApi.reducerPath]: userApi.reducer,
 });
 
 export const store = configureStore({
@@ -38,6 +40,7 @@ export const store = configureStore({
       authApi.middleware,
       productsApi.middleware,
       categoriesApi.middleware,
+      userApi.middleware,
     ]),
 });
 
