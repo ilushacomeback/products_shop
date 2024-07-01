@@ -43,6 +43,9 @@ const productsSlice = createSlice({
       state.page = 1;
       state.category = payload === 'all' ? '' : payload;
     },
+    resetProducts: (state) => {
+      state.products = []
+    }
   },
   extraReducers: (builder) => {
     builder.addMatcher(
