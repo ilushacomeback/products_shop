@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { UI, useLazy, Product } from '@/shared';
+import { useLazy, Product } from '@/shared';
 
 interface ProductProps {
   product: Product;
@@ -30,7 +30,6 @@ export const CardProduct = ({
   AddProductButton,
 }: ProductProps) => {
   const { name, price, image, id } = product;
-  const { CustomSubmit } = UI;
   const trackedItem = useRef(null);
   const { lazy, optionsObserver } = useLazy();
 
