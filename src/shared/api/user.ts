@@ -33,4 +33,4 @@ export const userApi = createApi({
   }),
 });
 
-export const { useDeleteUserMutation, useUpdateInfoUserMutation, useGetBasketQuery } = userApi;
+export const { useDeleteUserMutation, useUpdateInfoUserMutation } = userApi;
