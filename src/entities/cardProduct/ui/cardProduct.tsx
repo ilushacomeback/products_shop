@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { UI, useLazy, Product } from '@/shared';
 
 interface ProductProps {
   product: Product;
   isLast: boolean;
+  AddProductButton: React.FC<{ id: number }>;
 }
 
 const Li = styled.li`
@@ -23,8 +24,12 @@ const Span = styled.span`
   font-size: 24px;
 `;
 
-export const CardProduct = ({ product, isLast }: ProductProps) => {
-  const { name, price, image } = product;
+export const CardProduct = ({
+  product,
+  isLast,
+  AddProductButton,
+}: ProductProps) => {
+  const { name, price, image, id } = product;
   const { CustomSubmit } = UI;
   const trackedItem = useRef(null);
   const { lazy, optionsObserver } = useLazy();
@@ -45,7 +50,7 @@ export const CardProduct = ({ product, isLast }: ProductProps) => {
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <Span>{price}</Span>
-        <CustomSubmit type="button">Add</CustomSubmit>
+        <AddProductButton id={id} />
       </div>
     </Li>
   );

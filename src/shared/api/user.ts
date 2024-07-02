@@ -1,13 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiRoutes } from '../routes/index';
-import { AppStore, RootState  } from '../model/store';
-
-const user: string = decodeURIComponent(document.cookie).split('user=')[1];
+import { RootState  } from '../model/store';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${apiRoutes.baseUrl}/${apiRoutes.users}`,
+    baseUrl: apiRoutes.users(),
     prepareHeaders: (headers, { getState }) => {
       const state = getState() as RootState;
       const { token } = state.auth
@@ -29,7 +27,10 @@ export const userApi = createApi({
         url: `/${id}`,
       }),
     }),
+    getBasket: builder.query({
+        query: (id) => `/${id}`
+    })
   }),
 });
 
-export const { useDeleteUserMutation, useUpdateInfoUserMutation } = userApi;
+export const { useDeleteUserMutation, useUpdateInfoUserMutation, useGetBasketQuery } = userApi;

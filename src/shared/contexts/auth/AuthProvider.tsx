@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { ResponseData, AuthState } from '../../interfaces/index';
-import { useAppDispatch } from '../../hooks/index';
+import { useAppDispatch } from '../../hooks/hooksStore';
 import { actions } from '../../model/store';
 import { AuthContext } from './AuthContext';
 
@@ -21,6 +21,7 @@ export const AuthProvider = (props: PropsWithChildren) => {
     // localStorage.removeItem('user');
     dispatch(actions.logout());
   };
+
 
   return (
     <AuthContext.Provider value={{ logOut, logIn }}>

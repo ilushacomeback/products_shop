@@ -6,12 +6,7 @@ interface StaticRoutes {
 }
 
 interface ApiRoutes {
-    baseUrl: string,
-    login: string,
-    signup: string,
-    products: string
-    categories: string
-    users: string
+  [key: string]: () => string
 }
 
 export const staticRoutes: StaticRoutes = {
@@ -21,11 +16,13 @@ export const staticRoutes: StaticRoutes = {
   account: '/account',
 };
 
+const base = 'https://b0d841e2ac3f6529.mokky.dev'
+
 export const apiRoutes: ApiRoutes = {
-    baseUrl: 'https://b0d841e2ac3f6529.mokky.dev',
-    login: '/auth',
-    signup: '/register',
-    products: '/products',
-    categories: '/categories',
-    users: '/users',
+    baseUrl: () => base,
+    login: () => [base, 'auth'].join('/'),
+    signup: () => [base, 'register'].join('/'),
+    products: () => [base, 'products'].join('/'),
+    categories: () => [base, 'categories'].join('/'),
+    users: () => [base, 'users'].join('/'),
 }

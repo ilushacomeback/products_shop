@@ -4,7 +4,7 @@ import { apiRoutes } from '../routes/index';
 export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${apiRoutes.baseUrl}/${apiRoutes.products}`,
+    baseUrl: apiRoutes.products(),
   }),
   keepUnusedDataFor: 0,
   endpoints: (builder) => ({

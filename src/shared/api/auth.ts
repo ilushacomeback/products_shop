@@ -4,21 +4,21 @@ import { apiRoutes } from '../routes/index';
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: apiRoutes.baseUrl,
+    baseUrl: '',
   }),
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (data) => ({
         method: 'POST',
         body: data,
-        url: apiRoutes.login,
+        url: apiRoutes.login(),
       }),
     }),
     signup: builder.mutation({
       query: (data) => ({
         method: 'POST',
         body: data,
-        url: apiRoutes.signup,
+        url: apiRoutes.signup(),
       }),
     }),
   }),

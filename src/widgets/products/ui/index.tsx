@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import {
   actions,
   selectors,
@@ -7,7 +8,8 @@ import {
   useGetProductsQuery,
 } from '@/shared';
 import { CardProduct } from '@/entities';
-import { useEffect } from 'react';
+import { AddProductButton } from '@/features';
+
 
 const Ul = styled.ul`
   display: flex;
@@ -22,12 +24,12 @@ export const Products = () => {
   const category = useAppSelector(
     selectors.productsSelectors.selectCurrentCategory
   );
-  useGetProductsQuery({ page, category });
+  const { isLoading } = useGetProductsQuery({ page, category });
   const products = useAppSelector(selectors.productsSelectors.selectProducts);
 
   useEffect(() => {
     return () => {
-      dispatch(actions.resetProducts())
+      dispatch(actions.resetProducts());
     };
   }, []);
 
@@ -40,6 +42,7 @@ export const Products = () => {
           product={product}
           key={product.id}
           isLast={i === products.length - 1}
+          AddProductButton={AddProductButton}
         />
       ))}
     </Ul>
