@@ -1,8 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { authApi } from '../../api/auth';
-import { productsApi } from '../../api/products';
-import { categoriesApi } from '../../api/categories';
-import { userApi } from '../../api/user';
+import { authApi } from '@/shared/api/auth';
+import { productsApi } from '@/shared/api/products';
+import { categoriesApi } from '@/shared/api/categories';
+import { userApi } from '@/shared/api/user';
+import { basketApi } from '@/shared/api/basket';
 import {
   authReducer as auth,
   actions as authActions,
@@ -31,6 +32,7 @@ const reducer = combineReducers({
   [productsApi.reducerPath]: productsApi.reducer,
   [categoriesApi.reducerPath]: categoriesApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
+  [basketApi.reducerPath]: basketApi.reducer,
 });
 
 export const store = configureStore({
@@ -41,6 +43,7 @@ export const store = configureStore({
       productsApi.middleware,
       categoriesApi.middleware,
       userApi.middleware,
+      basketApi.middleware,
     ]),
 });
 

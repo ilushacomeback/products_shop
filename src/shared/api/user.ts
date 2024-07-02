@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiRoutes } from '../routes/index';
-import { RootState  } from '../model/store';
+import { RootState } from '../model/store';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -8,7 +8,7 @@ export const userApi = createApi({
     baseUrl: apiRoutes.users(),
     prepareHeaders: (headers, { getState }) => {
       const state = getState() as RootState;
-      const { token } = state.auth
+      const { token } = state.auth;
       headers.set('Authorization', `Bearer ${token}`);
       return headers;
     },
@@ -27,10 +27,21 @@ export const userApi = createApi({
         url: `/${id}`,
       }),
     }),
-    getBasket: builder.query({
-        query: (id) => `/${id}`
-    })
+    addInBasket: builder.mutation({
+      query: (data) => ({
+        method: 'PATCH',
+        body: data.product,
+        url: `/${data.id}`,
+      }),
+    }),
+    getBasketUser: builder.query({
+      query: (id) => `/${id}`,
+    }),
   }),
 });
 
-export const { useDeleteUserMutation, useUpdateInfoUserMutation } = userApi;
+export const {
+  useDeleteUserMutation,
+  useUpdateInfoUserMutation,
+  useAddInBasketMutation,
+} = userApi;

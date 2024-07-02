@@ -7,7 +7,10 @@ import {
 } from '@/shared';
 
 export const Basket = () => {
-  const basket = JSON.parse(getCookie('basket') as string);
+  console.log(getCookie('basket'));
+  const cookie = getCookie('basket')
+  if (!cookie) return null
+  const basket = JSON.parse(decodeURIComponent(cookie));
   const ids = Object.keys(basket);
   const { data }: { data?: Product[] } = useGetBasketQuery(ids);
   console.log('data', data);
@@ -16,7 +19,7 @@ export const Basket = () => {
   ) : (
     <div>
       {data.map((el: Product) => (
-        <div>
+        <div key={el.id}>
           <img src={el.image} alt="" />
           <h1>name: {el.name}</h1>
           <h2>number: {basket[el.id]}</h2>

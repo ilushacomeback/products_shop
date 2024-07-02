@@ -8,12 +8,13 @@ export type { ResponseData, AuthState, Product } from './interfaces/index';
 export { AuthProvider } from './contexts/auth/AuthProvider';
 export { AuthContext } from './contexts/auth/AuthContext';
 export * as UI from './ui-kit/index';
-export { useDeleteUserMutation, useUpdateInfoUserMutation } from './api/user';
+export { useGetBasketQuery } from './api/basket';
+export { useGetProductQuery, useGetProductsQuery } from './api/products';
 export {
-  useGetProductQuery,
-  useGetProductsQuery,
-  useGetBasketQuery,
-} from './api/products';
+  useDeleteUserMutation,
+  useUpdateInfoUserMutation,
+  useAddInBasketMutation,
+} from './api/user';
 export {
   useAppDispatch,
   useAppSelector,

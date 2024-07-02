@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
+import { CardProduct } from '@/entities';
+import { AddProductButton } from '@/features';
 import {
   actions,
   selectors,
@@ -7,8 +9,6 @@ import {
   useAppSelector,
   useGetProductsQuery,
 } from '@/shared';
-import { CardProduct } from '@/entities';
-import { AddProductButton } from '@/features';
 
 
 const Ul = styled.ul`
@@ -24,7 +24,7 @@ export const Products = () => {
   const category = useAppSelector(
     selectors.productsSelectors.selectCurrentCategory
   );
-  const { isLoading } = useGetProductsQuery({ page, category });
+  useGetProductsQuery({ page, category });
   const products = useAppSelector(selectors.productsSelectors.selectProducts);
 
   useEffect(() => {

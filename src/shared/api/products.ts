@@ -27,13 +27,7 @@ export const productsApi = createApi({
         url: '',
       }),
     }),
-    getBasket: builder.query({
-      query: (ids) => {
-        const params = ids.map((id: number) => `id[]=${id}`).join('&');
-        return `?${params}`;
-      },
-    }),
   }),
 });
 
-export const { useGetProductQuery, useGetProductsQuery, useGetBasketQuery } = productsApi;
+export const { useGetProductQuery, useGetProductsQuery } = productsApi;
