@@ -6,9 +6,7 @@ import { Basket } from '@/entities';
 export const Account = () => {
   const token = useAppSelector(selectors.authSelectors.selectToken);
 
-  return !token ? (
-    <Navigate to="/login" />
-  ) : (
+  return (
     <>
       <DeleteUser />
       <Basket />

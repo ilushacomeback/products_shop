@@ -29,9 +29,6 @@ const ButtonsForUser = () => {
   return (
     <>
       <MenuItem>
-        <NavLink to="/account">Account</NavLink>
-      </MenuItem>
-      <MenuItem>
         <NavLink to="/login" onClick={logOut}>
           Exit
         </NavLink>
@@ -55,6 +52,9 @@ export const Navbar = () => {
           <ResponsiveMenuItem>
             <NavLink to="/">Home</NavLink>
           </ResponsiveMenuItem>
+          <MenuItem>
+            <NavLink to="/account">Account</NavLink>
+          </MenuItem>
           <NavbarRight token={token} />
         </Menu>
       </NavbarContainer>
