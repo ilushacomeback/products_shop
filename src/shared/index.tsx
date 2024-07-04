@@ -8,7 +8,7 @@ export type { ResponseData, AuthState, Product } from './interfaces/index';
 export { AuthProvider } from './contexts/auth/AuthProvider';
 export { AuthContext } from './contexts/auth/AuthContext';
 export * as UI from './ui-kit/index';
-export { useGetBasketQuery } from './api/basket';
+export { useGetBasketQuery, useGetUserDataQuery } from './api/basket';
 export { useGetProductQuery, useGetProductsQuery } from './api/products';
 export {
   useDeleteUserMutation,

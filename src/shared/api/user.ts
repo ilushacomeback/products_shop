@@ -34,9 +34,6 @@ export const userApi = createApi({
         url: `/${data.id}`,
       }),
     }),
-    getBasketUser: builder.query({
-      query: (id) => `/${id}`,
-    }),
   }),
 });
 
