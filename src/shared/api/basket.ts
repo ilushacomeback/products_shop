@@ -1,24 +1,6 @@
-import {
-  FetchBaseQueryError,
-  FetchBaseQueryMeta,
-  createApi,
-  fetchBaseQuery,
-} from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiRoutes } from '../routes/index';
 import { RootState } from '../model/store';
-
-interface ResultType {
-  data?: {
-    basket?: {
-      [key: string]: string;
-    };
-  };
-  meta?: FetchBaseQueryMeta;
-}
-
-interface ErrorResult {
-  error: { status: number; error: string };
-}
 
 export const basketApi = createApi({
   reducerPath: 'basketApi',
@@ -41,10 +23,13 @@ export const basketApi = createApi({
             url: `/users/${id}`,
             headers: { Authorization: `Bearer ${token}` },
           });
+          if (data.error) {
+            throw new Error("Server Error");
+          }
           return new Promise((resolve, reject) => resolve(data));
         } catch (error) {
           return new Promise((resolve, reject) =>
-            reject({ status: 500, error })
+            reject(error)
           );
         }
       },
