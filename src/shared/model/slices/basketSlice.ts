@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store/index';
+import { basketApi } from '@/shared/api/basket';
 
 interface Basket {
   basket: Record<string, number>;
@@ -18,6 +19,9 @@ const basketSlice = createSlice({
         ? state.basket[payload] + 1
         : 1;
     },
+    addProductsInBasket: (state, { payload }) => {
+      state.basket = payload;
+    },
     removeProductInBasket: (state, { payload }) => {
       state.basket[payload] = state.basket[payload] - 1;
       if (state.basket[payload] < 1) {
@@ -25,7 +29,21 @@ const basketSlice = createSlice({
       }
     },
   },
-  extraReducers: () => {},
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        basketApi.endpoints.getUserData.matchFulfilled,
+        (state, { payload }) => {
+          state.basket = payload.basket;
+        }
+      )
+      .addMatcher(
+        basketApi.endpoints.addProductInBasket.matchFulfilled,
+        (state, { payload }) => {
+          state.basket = payload.basket;
+        }
+      );
+  },
 });
 
 export const basketSelectors = {

@@ -41,8 +41,8 @@ export const basketApi = createApi({
           const id = store.auth.id;
           const data = await baseQuery({
             url: `/users/${id}`,
-            method: 'POST',
-            body: basket,
+            method: 'PATCH',
+            body: { basket },
             headers: { Authorization: `Bearer ${token}` },
           });
           if (data.error) {
