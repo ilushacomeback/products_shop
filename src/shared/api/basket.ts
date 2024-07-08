@@ -15,26 +15,50 @@ export const basketApi = createApi({
       },
     }),
     getUserData: builder.query({
-      queryFn: async (id, api, extraOptions, baseQuery) => {
+      queryFn: async (arg, api, extraOptions, baseQuery) => {
         try {
           const store = api.getState() as RootState;
           const token = store.auth.token;
+          const id = store.auth.id;
           const data = await baseQuery({
             url: `/users/${id}`,
             headers: { Authorization: `Bearer ${token}` },
           });
           if (data.error) {
-            throw new Error("Server Error");
+            throw new Error('Server Error');
           }
           return new Promise((resolve, reject) => resolve(data));
         } catch (error) {
-          return new Promise((resolve, reject) =>
-            reject(error)
-          );
+          return new Promise((resolve, reject) => reject(error));
+        }
+      },
+    }),
+    addProductInBasket: builder.mutation({
+      queryFn: async (basket, api, extraOptions, baseQuery) => {
+        try {
+          const store = api.getState() as RootState;
+          const token = store.auth.token;
+          const id = store.auth.id;
+          const data = await baseQuery({
+            url: `/users/${id}`,
+            method: 'POST',
+            body: basket,
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (data.error) {
+            throw new Error('Server Error');
+          }
+          return new Promise((resolve, reject) => resolve(data));
+        } catch (error) {
+          return new Promise((resolve, reject) => reject(error));
         }
       },
     }),
   }),
 });
 
-export const { useGetBasketQuery, useGetUserDataQuery } = basketApi;
+export const {
+  useGetBasketQuery,
+  useGetUserDataQuery,
+  useAddProductInBasketMutation,
+} = basketApi;
