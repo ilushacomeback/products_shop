@@ -14,20 +14,28 @@ import {
   actions as productsActions,
   productsSelectors,
 } from '../slices/products';
+import {
+  basketReducer as basket,
+  actions as basketActions,
+  basketSelectors
+} from '../slices/basketSlice'
 
 export const actions = {
   ...authActions,
   ...productsActions,
+  ...basketActions,
 };
 
 export const selectors = {
   authSelectors,
   productsSelectors,
+  basketSelectors,
 };
 
 const reducer = combineReducers({
   auth,
   products,
+  basket,
   [authApi.reducerPath]: authApi.reducer,
   [productsApi.reducerPath]: productsApi.reducer,
   [categoriesApi.reducerPath]: categoriesApi.reducer,

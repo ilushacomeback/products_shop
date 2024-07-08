@@ -3,7 +3,7 @@ import { getCookie } from '@/shared';
 export const addGuestProduct = (id: number) => {
   let newBasket;
   const basket = getCookie('basket');
-  console.log('baslet', basket)
+
   if (basket) {
     const currentBasket = JSON.parse(basket);
     newBasket = {
@@ -13,6 +13,6 @@ export const addGuestProduct = (id: number) => {
   } else {
     newBasket = { [id]: 1 };
   }
-  const normalizeData = (JSON.stringify(newBasket));
+  const normalizeData = JSON.stringify(newBasket);
   document.cookie = `basket=${normalizeData}`;
 };
