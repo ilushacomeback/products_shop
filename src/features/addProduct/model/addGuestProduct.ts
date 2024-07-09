@@ -14,5 +14,5 @@ export const addGuestProduct = (id: number) => {
     newBasket = { [id]: 1 };
   }
   const normalizeData = JSON.stringify(newBasket);
-  document.cookie = `basket=${normalizeData}`;
+  document.cookie = `basket=${encodeURIComponent(normalizeData)}`;
 };

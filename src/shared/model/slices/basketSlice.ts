@@ -34,7 +34,9 @@ const basketSlice = createSlice({
       .addMatcher(
         basketApi.endpoints.getUserData.matchFulfilled,
         (state, { payload }) => {
-          state.basket = payload.basket;
+          if (payload.basket) {
+            state.basket = payload.basket;
+          }
         }
       )
       .addMatcher(

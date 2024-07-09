@@ -27,18 +27,10 @@ export const userApi = createApi({
         url: `/${id}`,
       }),
     }),
-    addInBasket: builder.mutation({
-      query: (data) => ({
-        method: 'PATCH',
-        body: data.product,
-        url: `/${data.id}`,
-      }),
-    }),
   }),
 });
 
 export const {
   useDeleteUserMutation,
   useUpdateInfoUserMutation,
-  useAddInBasketMutation,
 } = userApi;

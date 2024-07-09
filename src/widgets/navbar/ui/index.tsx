@@ -53,7 +53,7 @@ export const Navbar = () => {
             <NavLink to="/">Home</NavLink>
           </ResponsiveMenuItem>
           <MenuItem>
-            <NavLink to="/account">Account</NavLink>
+            <NavLink to="/account">Basket</NavLink>
           </MenuItem>
           <NavbarRight token={token} />
         </Menu>

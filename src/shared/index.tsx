@@ -17,10 +17,9 @@ export {
 export {
   useDeleteUserMutation,
   useUpdateInfoUserMutation,
-  useAddInBasketMutation,
 } from './api/user';
 export {
   useAppDispatch,
   useAppSelector,
   useAppStore,
-} from './hooks/hooksStore';
+} from './hooks';

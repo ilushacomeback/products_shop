@@ -7,6 +7,7 @@ export const basketApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: apiRoutes.baseUrl(),
   }),
+  keepUnusedDataFor: 0,
   endpoints: (builder) => ({
     getBasket: builder.query({
       query: (ids) => {

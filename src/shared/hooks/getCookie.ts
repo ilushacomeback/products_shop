@@ -1,4 +1,5 @@
 export const getCookie = (name: string): string | undefined => {
+  if (!document.cookie) return undefined
   const cookies = decodeURIComponent(document.cookie)
     .split(';')
     .reduce((acc: Record<string, string>, cookie: string) => {
