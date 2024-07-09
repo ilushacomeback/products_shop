@@ -4,8 +4,8 @@ export const useAddUserProduct = (
   productId: string,
   side?: string
 ) => {
-  const num = side === 'minus' ? -1 : 1
-  const quantity = products[productId] ? products[productId] + num : 1;
+  const minusOrPlus = side === 'minus' ? -1 : 1
+  const quantity = products[productId] ? products[productId] + minusOrPlus : 1;
   const newProducts = { ...products, [productId]: quantity };
   addProduct(newProducts);
 };
