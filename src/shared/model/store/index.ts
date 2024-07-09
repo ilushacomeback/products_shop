@@ -13,7 +13,7 @@ import {
   productsReducer as products,
   actions as productsActions,
   productsSelectors,
-} from '../slices/products';
+} from '../slices/productsSlice';
 import {
   basketReducer as basket,
   actions as basketActions,

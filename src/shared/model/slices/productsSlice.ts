@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { productsApi } from '@/shared/api/products';
-import { RootState } from '@/shared/model/store/index'
+import { RootState } from '@/shared/model/store/index';
 import { Product } from '@/shared/interfaces';
 
 interface InitialState {
@@ -44,8 +44,10 @@ const productsSlice = createSlice({
       state.category = payload === 'all' ? '' : payload;
     },
     resetProducts: (state) => {
-      state.products = []
-    }
+      state.products = [];
+      state.page = 1;
+      state.category = '';
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
