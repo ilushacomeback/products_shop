@@ -3,8 +3,8 @@ import {
   useAddProductInBasketMutation,
   useAppSelector,
 } from '@/shared';
-import { addGuestProduct } from '../model/addGuestProduct';
-import { useAddUserProduct } from '../model/useAddUserProduct';
+import { addGuestProduct } from './addGuestProduct';
+import { useAddUserProduct } from './useAddUserProduct';
 
 export const useAddProduct = () => {
   const [addUserProduct] = useAddProductInBasketMutation();
@@ -12,6 +12,6 @@ export const useAddProduct = () => {
   const products = useAppSelector(selectors.basketSelectors.selectProducts);
 
   return !isAuth
-    ? (id: number) => addGuestProduct(id)
-    : (id: number) => useAddUserProduct(addUserProduct, products, String(id));
+    ? (id: number, side?: string) => addGuestProduct(id, side)
+    : (id: number, side?: string) => useAddUserProduct(addUserProduct, products, String(id), side);
 };

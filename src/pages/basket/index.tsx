@@ -1,4 +1,4 @@
-import { Basket } from '@/entities';
+import { Basket } from '@/widgets';
 
 export const Account = () => {
   return <Basket />;

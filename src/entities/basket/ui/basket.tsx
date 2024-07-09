@@ -7,31 +7,13 @@ import {
   actions,
 } from '@/shared';
 import { useBasket } from '../model/useBasket';
-import { useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
 
-const Button = styled.button`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: white;
-`;
-
-interface PropsButtonsOfQuantity {
-  quantity: number;
+interface PropsBasket {
+  ButtonsOfQuantity: React.FC<{ quantity: number; id: number }>;
 }
 
-const ButtonsOfQuantity = (props: PropsButtonsOfQuantity) => {
-  return (
-    <div style={{ display: 'flex' }}>
-      <Button>-</Button>
-      {props.quantity}
-      <Button>+</Button>
-    </div>
-  );
-};
-
-export const Basket = () => {
+export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   const dispatch = useAppDispatch();
   const basket = useBasket();
   const token = useAppSelector(selectors.authSelectors.selectToken);
@@ -69,16 +51,18 @@ export const Basket = () => {
     <div>Корзина пуста</div>
   ) : (
     <div style={{ display: 'flex', gap: '20px' }}>
-      {productsUser?.map((el: Product) => (
-        <div key={el.id} style={{ width: '200px' }}>
-          <img src={el.image} alt="" />
-          <h1>name: {el.name}</h1>
-          <h2>number: {currentBasket[el.id]}</h2>
-          {currentBasket[el.id] !== 0 && (
-            <ButtonsOfQuantity quantity={currentBasket[el.id]} />
-          )}
-        </div>
-      ))}
+      {productsUser
+        ?.filter((el) => currentBasket[el.id] > 0)
+        .map((el: Product) => (
+          <div key={el.id} style={{ width: '200px' }}>
+            <img src={el.image} alt="" />
+            <h1>name: {el.name}</h1>
+            <h2>number: {currentBasket[el.id]}</h2>
+            {currentBasket[el.id] !== 0 && (
+              <ButtonsOfQuantity quantity={currentBasket[el.id]} id={el.id} />
+            )}
+          </div>
+        ))}
     </div>
   );
 };

@@ -24,9 +24,8 @@ export const Products = () => {
   const category = useAppSelector(
     selectors.productsSelectors.selectCurrentCategory
   );
-  const {data} = useGetProductsQuery({ page, category });
+  useGetProductsQuery({ page, category });
   const products = useAppSelector(selectors.productsSelectors.selectProducts);
-  console.log(data)
 
   useEffect(() => {
     return () => {
