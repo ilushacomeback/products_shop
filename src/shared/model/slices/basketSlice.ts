@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store/index';
+import { RootState } from '@/shared/model/store/index'
 import { basketApi } from '@/shared/api/basket';
 
 interface Basket {

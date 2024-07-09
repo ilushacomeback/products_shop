@@ -1,5 +1,3 @@
-import { selectors, useAppSelector } from '@/shared';
-
 export const useAddUserProduct = (
   addProduct: (products: Record<string, number>) => void,
   products: Record<string, number>,
