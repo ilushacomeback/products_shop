@@ -8,6 +8,28 @@ import {
 } from '@/shared';
 import { useBasket } from '../model/useBasket';
 import { useEffect } from 'react';
+import styled from 'styled-components';
+
+const Button = styled.button`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+`;
+
+interface PropsButtonsOfQuantity {
+  quantity: number;
+}
+
+const ButtonsOfQuantity = (props: PropsButtonsOfQuantity) => {
+  return (
+    <div style={{ display: 'flex' }}>
+      <Button>-</Button>
+      {props.quantity}
+      <Button>+</Button>
+    </div>
+  );
+};
 
 export const Basket = () => {
   const dispatch = useAppDispatch();
@@ -52,6 +74,9 @@ export const Basket = () => {
           <img src={el.image} alt="" />
           <h1>name: {el.name}</h1>
           <h2>number: {currentBasket[el.id]}</h2>
+          {currentBasket[el.id] !== 0 && (
+            <ButtonsOfQuantity quantity={currentBasket[el.id]} />
+          )}
         </div>
       ))}
     </div>
