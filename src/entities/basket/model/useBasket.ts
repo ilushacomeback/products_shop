@@ -1,4 +1,5 @@
 import { getBasketOfCookie } from './getBasketOfCookie';
+import { syncBaskets } from './syncBaskets';
 import {
   useAppSelector,
   useGetUserDataQuery,
@@ -13,10 +14,10 @@ export const useBasket = () => {
   const [addProducts] = useAddProductInBasketMutation();
   const basketOfCookie = getBasketOfCookie();
   const { data, isLoading } = useGetUserDataQuery(undefined);
-  
+
   if (token && basketOfCookie && !isLoading) {
     const basket = data.basket;
-    const result = { ...basket, ...basketOfCookie };
+    const result = syncBaskets(basket, basketOfCookie);
     addProducts(result);
     document.cookie = 'basket=;max-age=0';
   } else {
