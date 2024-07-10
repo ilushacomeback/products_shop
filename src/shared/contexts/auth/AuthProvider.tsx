@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { ResponseData, AuthState } from '../../interfaces/index';
 import { useAppDispatch } from '../../hooks';
-import { actions } from '../../model/store';
+import { actions } from '../../../app/model/store';
 import { AuthContext } from './AuthContext';
 
 export const AuthProvider = (props: PropsWithChildren) => {

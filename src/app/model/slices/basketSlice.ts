@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '@/shared/model/store/index'
+import { RootState } from '@/app/model/store/index';
 import { basketApi } from '@/shared/api/basket';
+import { getBasketInitialState } from '../helpers/getBasketInitialState';
 
 interface Basket {
   basket: Record<string, number>;
@@ -20,7 +21,9 @@ const basketSlice = createSlice({
         : 1;
     },
     addProductsInBasket: (state, { payload }) => {
-      state.basket = payload;
+      const basket = typeof payload === 'string' ? JSON.parse(payload) : payload;
+      console.log(basket);
+      state.basket = basket;
     },
     removeProductInBasket: (state, { payload }) => {
       state.basket[payload] = state.basket[payload] - 1;

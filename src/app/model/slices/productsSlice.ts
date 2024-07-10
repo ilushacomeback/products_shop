@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { productsApi } from '@/shared/api/products';
-import { RootState } from '@/shared/model/store/index';
+import { RootState } from '@/app/model/store/index';
 import { Product } from '@/shared/interfaces';
 
 interface InitialState {

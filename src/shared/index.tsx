@@ -1,7 +1,7 @@
 export { staticRoutes, apiRoutes } from './routes/index';
 export { useLoginMutation, useSignupMutation } from './api/auth';
 export { useGetCategoriesQuery } from './api/categories';
-export { store, actions, selectors } from './model/store/index';
+export { store, actions, selectors } from '../app/model/store/index';
 export { useLazy } from './hooks/useLazy';
 export { getCookie } from './hooks/getCookie';
 export type { ResponseData, AuthState, Product } from './interfaces/index';

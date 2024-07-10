@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { authApi } from '../../api/auth';
+import { authApi } from '@/shared/api/auth';
 import type { RootState } from '../store';
-import { getInitialState } from '../helpers/getInitialState';
+import { getAuthInitialState } from '../helpers/getInitialState';
 
 const authSlice = createSlice({
   name: 'authSlice',
-  initialState: getInitialState(),
+  initialState: getAuthInitialState(),
   reducers: {
     logout: (state) => {
       state.id = null;

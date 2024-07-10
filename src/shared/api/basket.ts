@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiRoutes } from '../routes/index';
-import { RootState } from '../model/store';
+import { RootState } from '../../app/model/store';
 
 export const basketApi = createApi({
   reducerPath: 'basketApi',
