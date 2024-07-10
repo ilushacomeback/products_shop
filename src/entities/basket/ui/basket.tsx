@@ -16,7 +16,6 @@ interface PropsBasket {
 export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   const dispatch = useAppDispatch();
   const basket = useBasket();
-  const token = useAppSelector(selectors.authSelectors.selectToken);
   const currentBasket = useAppSelector(
     selectors.basketSelectors.selectProducts
   );
@@ -28,7 +27,7 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   }, []);
 
   if (!currentBasket) {
-    return <div>loading...</div>;
+    return <div>Basket empty</div>;
   }
 
   const productsIds: string[] = Object.keys(currentBasket);
@@ -43,7 +42,7 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   }
 
   return productsIds.length === 0 && !isLoading ? (
-    <div>Корзина пуста</div>
+    <div>Basket empty</div>
   ) : (
     <div style={{ display: 'flex', gap: '20px' }}>
       {productsUser

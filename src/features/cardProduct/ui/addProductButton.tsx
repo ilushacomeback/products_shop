@@ -10,11 +10,12 @@ export const AddProductButton = ({ id }: { id: number }) => {
   const products = useAppSelector(selectors.basketSelectors.selectProducts);
   const { CustomSubmit } = UI;
   const addProduct = useAddProduct();
-  const textBtn = products[id] ? State.InBasket : State.OutBasket;
+  const textBtn = products && products[id] ? State.InBasket : State.OutBasket;
   return (
     <CustomSubmit
       onClick={() => addProduct(id)}
       disabled={textBtn === State.InBasket}
+      color={textBtn === State.InBasket ? 'red' : ''}
     >
       {textBtn}
     </CustomSubmit>

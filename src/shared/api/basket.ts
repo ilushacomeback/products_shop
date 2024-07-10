@@ -21,6 +21,7 @@ export const basketApi = createApi({
           const store = api.getState() as RootState;
           const token = store.auth.token;
           const id = store.auth.id;
+          if (!token) return new Promise((resolve, reject) => reject('not token'))
           const data = await baseQuery({
             url: `/users/${id}`,
             headers: { Authorization: `Bearer ${token}` },

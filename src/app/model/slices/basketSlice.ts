@@ -22,7 +22,6 @@ const basketSlice = createSlice({
     },
     addProductsInBasket: (state, { payload }) => {
       const basket = typeof payload === 'string' ? JSON.parse(payload) : payload;
-      console.log(basket);
       state.basket = basket;
     },
     removeProductInBasket: (state, { payload }) => {
