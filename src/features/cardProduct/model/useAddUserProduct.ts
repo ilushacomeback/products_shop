@@ -4,8 +4,13 @@ export const useAddUserProduct = (
   productId: string,
   side?: string
 ) => {
-  const minusOrPlus = side === 'minus' ? -1 : 1
+  const minusOrPlus = side === 'minus' ? -1 : 1;
   const quantity = products[productId] ? products[productId] + minusOrPlus : 1;
-  const newProducts = { ...products, [productId]: quantity };
+  const newProducts = { ...products, [productId]: quantity }
+  if (!quantity) {
+    console.log(quantity, productId, newProducts)
+    delete newProducts[productId];
+  }
+  
   addProduct(newProducts);
 };

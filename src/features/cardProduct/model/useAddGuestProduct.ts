@@ -19,6 +19,11 @@ export const useAddGuestProduct = (
   } else {
     newBasket = { [id]: 1 };
   }
+  
+  if (!newBasket[id]) {
+    delete newBasket[id];
+  }
+
   dispatch(actions.addProductsInBasket(newBasket));
   const normalizeData = JSON.stringify(newBasket);
   document.cookie = `basket=${encodeURIComponent(normalizeData)}`;
