@@ -7,7 +7,7 @@ import {
   ResponsiveMenuItem,
   MenuItem,
 } from '../styled-component/index';
-import { useAppSelector, selectors } from '@/shared';
+import { useAppSelector, selectors, useAppDispatch, actions } from '@/shared';
 import { AuthContext } from '@/shared';
 
 const ButtonsForGuest = () => {
@@ -25,11 +25,17 @@ const ButtonsForGuest = () => {
 
 const ButtonsForUser = () => {
   const { logOut } = useContext(AuthContext);
+  const dispatch = useAppDispatch()
+
+  const handleExit = () => {
+    dispatch(actions.addProductsInBasket({}))
+    logOut()
+  }
 
   return (
     <>
       <MenuItem>
-        <NavLink to="/login" onClick={logOut}>
+        <NavLink to="/login" onClick={handleExit}>
           Exit
         </NavLink>
       </MenuItem>

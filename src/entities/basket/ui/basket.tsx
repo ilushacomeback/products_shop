@@ -25,11 +25,6 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
     if (basket) {
       dispatch(actions.addProductsInBasket(basket));
     }
-    return () => {
-      if (!token) {
-        dispatch(actions.addProductsInBasket({}));
-      }
-    };
   }, []);
 
   if (!currentBasket) {
