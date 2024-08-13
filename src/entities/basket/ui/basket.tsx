@@ -46,14 +46,14 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   return productsIds.length === 0 && !isLoading ? (
     <div>Basket empty</div>
   ) : (
-    <>
-      <ul style={{ display: 'flex', gap: '20px' }}>
+    <main style={{ margin: '10px' }}>
+      <ul style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
         {productsUser
           ?.filter((product) => currentBasket[product.id] > 0)
           .map((product: Product) => (
             <li key={product.id} style={{ width: '200px' }}>
               <img src={product.image} alt={product.name} />
-              <h1>name: {product.name}</h1>
+              <h1 style={{ textWrap: 'nowrap' }}>name: {product.name}</h1>
               <h2>number: {currentBasket[product.id]}</h2>
               {currentBasket[product.id] !== 0 && (
                 <ButtonsOfQuantity
@@ -75,6 +75,6 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
         }`}
       </span>
       <CustomSubmit>Pay</CustomSubmit>
-    </>
+    </main>
   );
 };

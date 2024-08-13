@@ -20,7 +20,7 @@ export const useAddGuestProduct = (
     newBasket = { [id]: 1 };
   }
   
-  if (!newBasket[id]) {
+  if (!newBasket[id] || side === 'remove') {
     delete newBasket[id];
   }
 

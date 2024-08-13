@@ -14,6 +14,7 @@ const Ul = styled.ul`
 
 export const Categories = () => {
   const dispatch = useAppDispatch()
+  
   const handleClick = (category: Category) => {
     dispatch(actions.getCategory(category.category));
   };

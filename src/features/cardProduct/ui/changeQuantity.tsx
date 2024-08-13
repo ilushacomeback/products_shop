@@ -2,13 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAddProduct } from '../model/addProduct';
 
-const Button = styled.button`
+const ButtonQuantity = styled.button`
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background-color: white;
   text-align: center;
 `;
+
+const ButtonDelete = styled.button`
+  width: 50px;
+  height: 20px;
+  border-radius: 6px;
+  background-color: red;
+  font-size: 0.9rem;
+`
 
 interface PropsButtonsOfQuantity {
   quantity: number;
@@ -19,9 +27,10 @@ export const ButtonsOfQuantity = (props: PropsButtonsOfQuantity) => {
   const addProduct = useAddProduct();
   return (
     <div style={{ display: 'flex', gap: '5px', alignItems: 'center', textAlign: 'center'}}>
-      <Button onClick={() => addProduct(props.id, 'minus')}>-</Button>
+      <ButtonQuantity onClick={() => addProduct(props.id, 'minus')}>-</ButtonQuantity>
       <span>{props.quantity}</span>
-      <Button onClick={() => addProduct(props.id, 'plus')}>+</Button>
+      <ButtonQuantity onClick={() => addProduct(props.id, 'plus')}>+</ButtonQuantity>
+      <ButtonDelete onClick={() => addProduct(props.id, 'remove')}>delete</ButtonDelete>
     </div>
   );
 };
