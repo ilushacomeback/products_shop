@@ -1,5 +1,6 @@
 import { UI, selectors, useAppSelector } from '@/shared';
 import { useAddProduct } from '../model/addProduct';
+import { useNavigate } from 'react-router-dom';
 
 enum State {
   InBasket = 'In Basket',
@@ -8,16 +9,16 @@ enum State {
 
 export const AddProductButton = ({ id }: { id: number }) => {
   const products = useAppSelector(selectors.basketSelectors.selectProducts);
+  const navigate = useNavigate();
   const { CustomSubmit } = UI;
   const addProduct = useAddProduct();
   const textBtn = products && products[id] ? State.InBasket : State.OutBasket;
-  return (
-    <CustomSubmit
-      onClick={() => addProduct(id)}
-      disabled={textBtn === State.InBasket}
-      color={textBtn === State.InBasket ? 'red' : ''}
-    >
-      {textBtn}
-    </CustomSubmit>
-  );
+  if (textBtn === State.InBasket) {
+    return (
+      <CustomSubmit onClick={() => navigate('/account')} color="red">
+        {textBtn}
+      </CustomSubmit>
+    );
+  }
+  return <CustomSubmit onClick={() => addProduct(id)}>{textBtn}</CustomSubmit>
 };
