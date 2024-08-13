@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { selectors, useAppSelector, useLoginMutation, AuthContext, UI } from '@/shared';
+import { selectors, useAppSelector, useLoginMutation, AuthContext, UI, staticRoutes } from '@/shared';
 
 interface InputsForm {
   email: string;
@@ -35,7 +35,7 @@ export const LoginForm = () => {
         }
       }
       logIn(response.data);
-      navigate('/');
+      navigate(staticRoutes.home);
     } catch (e) {
       console.log(e);
     }

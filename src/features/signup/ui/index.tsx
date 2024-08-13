@@ -7,6 +7,7 @@ import {
   useSignupMutation,
   AuthContext,
   UI,
+  staticRoutes,
 } from '@/shared';
 
 interface InputsForm {
@@ -35,7 +36,7 @@ export const SignupForm = () => {
         }
       }
       logIn(response.data);
-      navigate('/');
+      navigate(staticRoutes.home);
     } catch (e) {
       console.log(e);
     }

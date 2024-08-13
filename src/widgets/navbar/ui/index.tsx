@@ -7,17 +7,17 @@ import {
   ResponsiveMenuItem,
   MenuItem,
 } from '../styled-component/index';
-import { useAppSelector, selectors, useAppDispatch, actions } from '@/shared';
+import { useAppSelector, selectors, useAppDispatch, actions, staticRoutes } from '@/shared';
 import { AuthContext } from '@/shared';
 
 const ButtonsForGuest = () => {
   return (
     <>
       <MenuItem>
-        <NavLink to="/login">Login</NavLink>
+        <NavLink to={staticRoutes.login}>Login</NavLink>
       </MenuItem>
       <MenuItem>
-        <NavLink to="/signup">Signup</NavLink>
+        <NavLink to={staticRoutes.signup}>Signup</NavLink>
       </MenuItem>
     </>
   );
@@ -35,7 +35,7 @@ const ButtonsForUser = () => {
   return (
     <>
       <MenuItem>
-        <NavLink to="/login" onClick={handleExit}>
+        <NavLink to={staticRoutes.login} onClick={handleExit}>
           Exit
         </NavLink>
       </MenuItem>
@@ -56,10 +56,10 @@ export const Navbar = () => {
         <Logo>MyLogo</Logo>
         <Menu>
           <ResponsiveMenuItem>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to={staticRoutes.home}>Home</NavLink>
           </ResponsiveMenuItem>
           <MenuItem>
-            <NavLink to="/account">Basket</NavLink>
+            <NavLink to={staticRoutes.basket}>Basket</NavLink>
           </MenuItem>
           <NavbarRight token={token} />
         </Menu>

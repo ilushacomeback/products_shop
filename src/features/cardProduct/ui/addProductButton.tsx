@@ -1,4 +1,4 @@
-import { UI, selectors, useAppSelector } from '@/shared';
+import { UI, selectors, staticRoutes, useAppSelector } from '@/shared';
 import { useAddProduct } from '../model/addProduct';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ export const AddProductButton = ({ id }: { id: number }) => {
   const textBtn = products && products[id] ? State.InBasket : State.OutBasket;
   if (textBtn === State.InBasket) {
     return (
-      <CustomSubmit onClick={() => navigate('/account')} color="red">
+      <CustomSubmit onClick={() => navigate(staticRoutes.basket)} color="red">
         {textBtn}
       </CustomSubmit>
     );

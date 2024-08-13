@@ -2,7 +2,7 @@ interface StaticRoutes {
   home: string;
   signup: string;
   login: string;
-  account: string;
+  basket: string;
 }
 
 interface ApiRoutes {
@@ -13,7 +13,7 @@ export const staticRoutes: StaticRoutes = {
   home: '/',
   signup: '/signup',
   login: '/login',
-  account: '/account',
+  basket: '/basket',
 };
 
 const base = 'https://b0d841e2ac3f6529.mokky.dev'

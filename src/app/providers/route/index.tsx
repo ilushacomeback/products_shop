@@ -9,7 +9,7 @@ export const RouterProvider = (props: PropsWithChildren) => {
       {props.children}
       <Routes>
         <Route path={routes.home} element={<Home />} />
-        <Route path={routes.account} element={<Account />} />
+        <Route path={routes.basket} element={<Account />} />
         <Route path={routes.login} element={<Login />} />
         <Route path={routes.signup} element={<Signup />} />
       </Routes>
