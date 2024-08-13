@@ -1,9 +1,16 @@
 import { useGetCategoriesQuery, UI, useAppDispatch, actions } from '@/shared';
+import styled from 'styled-components';
 
 interface Category {
   category: string;
   id: number;
 }
+
+const Ul = styled.ul`
+  @media(max-width: 407px) {
+    display: none;
+  }
+`
 
 export const Categories = () => {
   const dispatch = useAppDispatch()
@@ -17,7 +24,7 @@ export const Categories = () => {
   return !data ? (
     <div>loading...</div>
   ) : (
-    <ul>
+    <Ul>
       {data.map((category) => (
         <li key={category.category}>
           <CustomSubmit
@@ -28,6 +35,6 @@ export const Categories = () => {
           </CustomSubmit>
         </li>
       ))}
-    </ul>
+    </Ul>
   );
 };

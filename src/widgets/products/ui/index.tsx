@@ -16,6 +16,10 @@ const Ul = styled.ul`
   flex-wrap: wrap;
   gap: 2rem;
   padding: 10px 20px;
+
+  @media(max-width: 407px) {
+    justify-content: center;
+  }
 `;
 
 export const Products = () => {

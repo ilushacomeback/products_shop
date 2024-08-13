@@ -7,6 +7,7 @@ const Button = styled.button`
   height: 20px;
   border-radius: 50%;
   background-color: white;
+  text-align: center;
 `;
 
 interface PropsButtonsOfQuantity {
@@ -17,9 +18,9 @@ interface PropsButtonsOfQuantity {
 export const ButtonsOfQuantity = (props: PropsButtonsOfQuantity) => {
   const addProduct = useAddProduct();
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', gap: '5px', alignItems: 'center', textAlign: 'center'}}>
       <Button onClick={() => addProduct(props.id, 'minus')}>-</Button>
-      {props.quantity}
+      <span>{props.quantity}</span>
       <Button onClick={() => addProduct(props.id, 'plus')}>+</Button>
     </div>
   );

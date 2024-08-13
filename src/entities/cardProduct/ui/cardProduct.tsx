@@ -20,7 +20,7 @@ const Li = styled.li`
 `;
 
 const Span = styled.span`
-  font-weight: 800;
+  font-weight: 400;
   font-size: 24px;
 `;
 
@@ -48,7 +48,7 @@ export const CardProduct = ({
         <h3>{name}</h3>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Span>{price}</Span>
+        <Span>${price}</Span>
         <AddProductButton id={id} />
       </div>
     </Li>

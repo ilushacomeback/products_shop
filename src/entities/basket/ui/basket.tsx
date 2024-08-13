@@ -5,6 +5,7 @@ import {
   useAppSelector,
   useAppDispatch,
   actions,
+  UI,
 } from '@/shared';
 import { useBasket } from '../model/useBasket';
 import React, { useEffect } from 'react';
@@ -14,6 +15,7 @@ interface PropsBasket {
 }
 
 export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
+  const { CustomSubmit } = UI;
   const dispatch = useAppDispatch();
   const basket = useBasket();
   const currentBasket = useAppSelector(
@@ -44,19 +46,35 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   return productsIds.length === 0 && !isLoading ? (
     <div>Basket empty</div>
   ) : (
-    <div style={{ display: 'flex', gap: '20px' }}>
-      {productsUser
-        ?.filter((el) => currentBasket[el.id] > 0)
-        .map((el: Product) => (
-          <div key={el.id} style={{ width: '200px' }}>
-            <img src={el.image} alt="" />
-            <h1>name: {el.name}</h1>
-            <h2>number: {currentBasket[el.id]}</h2>
-            {currentBasket[el.id] !== 0 && (
-              <ButtonsOfQuantity quantity={currentBasket[el.id]} id={el.id} />
-            )}
-          </div>
-        ))}
-    </div>
+    <>
+      <ul style={{ display: 'flex', gap: '20px' }}>
+        {productsUser
+          ?.filter((product) => currentBasket[product.id] > 0)
+          .map((product: Product) => (
+            <li key={product.id} style={{ width: '200px' }}>
+              <img src={product.image} alt={product.name} />
+              <h1>name: {product.name}</h1>
+              <h2>number: {currentBasket[product.id]}</h2>
+              {currentBasket[product.id] !== 0 && (
+                <ButtonsOfQuantity
+                  quantity={currentBasket[product.id]}
+                  id={product.id}
+                />
+              )}
+            </li>
+          ))}
+      </ul>
+      <span>
+        Result:{' '}
+        {`$${
+          productsUser?.reduce(
+            (acc, product) =>
+              (acc += Number(product.price) * currentBasket[product.id]),
+            0
+          ) || ''
+        }`}
+      </span>
+      <CustomSubmit>Pay</CustomSubmit>
+    </>
   );
 };

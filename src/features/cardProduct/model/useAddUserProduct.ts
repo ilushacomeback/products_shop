@@ -8,7 +8,6 @@ export const useAddUserProduct = (
   const quantity = products[productId] ? products[productId] + minusOrPlus : 1;
   const newProducts = { ...products, [productId]: quantity }
   if (!quantity) {
-    console.log(quantity, productId, newProducts)
     delete newProducts[productId];
   }
   
