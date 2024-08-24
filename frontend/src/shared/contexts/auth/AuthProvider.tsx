@@ -8,8 +8,9 @@ export const AuthProvider = (props: PropsWithChildren) => {
   const dispatch = useAppDispatch();
 
   const logIn = (payload: ResponseData): void => {
-    const { id, fullName } = payload.data;
-    const normalizeData: AuthState = { token: payload.token, id, fullName };
+    console.log(payload)
+    const { id, username } = payload;
+    const normalizeData: AuthState = { token: '1', id, username };
     document.cookie = `user=${encodeURIComponent(
       JSON.stringify(normalizeData)
     )};samesite=strict;max-age=604800`;

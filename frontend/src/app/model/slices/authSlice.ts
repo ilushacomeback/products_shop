@@ -10,7 +10,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.id = null;
       state.token = null;
-      state.fullName = null;
+      state.username = null;
     },
   },
   extraReducers: (builder) => {
@@ -19,16 +19,16 @@ const authSlice = createSlice({
         authApi.endpoints.login.matchFulfilled,
         (state, { payload }) => {
           state.token = payload.token;
-          state.id = payload.data.id;
-          state.fullName = payload.data.fullName;
+          state.id = payload.id;
+          state.username = payload.username;
         }
       )
       .addMatcher(
         authApi.endpoints.signup.matchFulfilled,
         (state, { payload }) => {
-          state.token = payload.token;
-          state.id = payload.data.id;
-          state.fullName = payload.data.fullName;
+          // state.token = payload.token;
+          state.id = payload.id;
+          state.username = payload.username;
         }
       );
   },

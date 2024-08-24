@@ -9,5 +9,5 @@ export const getAuthInitialState = (): AuthState => {
     return JSON.parse(user);
   }
 
-  return { token: null, id: null, fullName: null };
+  return { token: null, id: null, username: null };
 };

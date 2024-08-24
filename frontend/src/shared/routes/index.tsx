@@ -16,7 +16,7 @@ export const staticRoutes: StaticRoutes = {
   basket: '/basket',
 };
 
-const base = 'https://b0d841e2ac3f6529.mokky.dev'
+const base = 'http://localhost:4000'
 
 export const apiRoutes: ApiRoutes = {
     baseUrl: () => base,

@@ -13,7 +13,7 @@ import {
 interface InputsForm {
   email: string;
   password: string;
-  fullName: string;
+  username: string;
 }
 
 export const SignupForm = () => {
@@ -28,6 +28,7 @@ export const SignupForm = () => {
   const onSubmit: SubmitHandler<InputsForm> = async (data: InputsForm) => {
     try {
       const response = await signup(data);
+      console.log('res', response)
       if (error) {
         if ('status' in error && error.status === 401) {
           throw new Error('notUniqUser');
@@ -46,12 +47,12 @@ export const SignupForm = () => {
     <Navigate to="/" />
   ) : (
     <CustomForm onSubmit={handleSubmit(onSubmit)}>
-      <CustomLabel htmlFor="fullName">Name</CustomLabel>
+      <CustomLabel htmlFor="username">Name</CustomLabel>
       <CustomInput
-        {...register('fullName', { required: true })}
+        {...register('username', { required: true })}
         type="text"
-        name="fullName"
-        id="fullName"
+        name="username"
+        id="username"
         required
       />
       <CustomLabel htmlFor="email">Email</CustomLabel>
