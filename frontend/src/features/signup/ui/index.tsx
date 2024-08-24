@@ -25,7 +25,7 @@ export const SignupForm = () => {
 
   const [signup, { error }] = useSignupMutation();
 
-  const onSubmit: SubmitHandler<InputsForm> = async (data) => {
+  const onSubmit: SubmitHandler<InputsForm> = async (data: InputsForm) => {
     try {
       const response = await signup(data);
       if (error) {
