@@ -9,7 +9,7 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.id = null;
-      state.token = null;
+      state.accessToken = null;
       state.username = null;
     },
   },
@@ -18,24 +18,24 @@ const authSlice = createSlice({
       .addMatcher(
         authApi.endpoints.login.matchFulfilled,
         (state, { payload }) => {
-          state.token = payload.token;
-          state.id = payload.id;
-          state.username = payload.username;
+          state.accessToken = payload.accessToken;
+          state.id = payload.user.id;
+          state.username = payload.user.username;
         }
       )
       .addMatcher(
         authApi.endpoints.signup.matchFulfilled,
         (state, { payload }) => {
-          // state.token = payload.token;
-          state.id = payload.id;
-          state.username = payload.username;
+          state.accessToken = payload.accessToken;
+          state.id = payload.user.id;
+          state.username = payload.user.username;
         }
       );
   },
 });
 
 export const authSelectors = {
-  selectToken: (state: RootState) => state.auth.token,
+  selectToken: (state: RootState) => state.auth.accessToken,
   selectId: (state: RootState) => state.auth.id,
 };
 export const authReducer = authSlice.reducer;

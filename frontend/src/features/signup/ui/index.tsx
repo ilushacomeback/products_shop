@@ -28,7 +28,6 @@ export const SignupForm = () => {
   const onSubmit: SubmitHandler<InputsForm> = async (data: InputsForm) => {
     try {
       const response = await signup(data);
-      console.log('res', response)
       if (error) {
         if ('status' in error && error.status === 401) {
           throw new Error('notUniqUser');

@@ -8,19 +8,21 @@ export const AuthProvider = (props: PropsWithChildren) => {
   const dispatch = useAppDispatch();
 
   const logIn = (payload: ResponseData): void => {
-    console.log(payload)
-    const { id, username } = payload;
-    const normalizeData: AuthState = { token: '1', id, username };
-    document.cookie = `user=${encodeURIComponent(
-      JSON.stringify(normalizeData)
-    )};samesite=strict;max-age=604800`;
-    // localStorage.setItem('user', JSON.stringify(normalizeData));
+    const {
+      user: { id, username },
+      accessToken,
+    } = payload;
+    const normalizeData: AuthState = { accessToken, id, username };
+    localStorage.setItem('user', JSON.stringify(normalizeData));
+    // document.cookie = `user=${encodeURIComponent(
+    //   JSON.stringify(normalizeData)
+    // )};samesite=strict;max-age=604800`;
   };
 
   const logOut = (): void => {
-    document.cookie = `user=;max-age=0`;
-    // localStorage.removeItem('user');
+    localStorage.removeItem('user');
     dispatch(actions.logout());
+    // document.cookie = `user=;max-age=0`;
   };
 
   return (

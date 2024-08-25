@@ -1,14 +1,17 @@
 export interface AuthState {
-  token: string | null;
+  accessToken: string | null;
   id: number | null;
   username: string | null;
 }
 
 export interface ResponseData {
-  token: string;
-  id: number;
-  username: string;
-  email: string;
+  accessToken: string;
+  refreshToken: string;
+  user: {
+    id: number;
+    username: string;
+    email: string;
+  };
 }
 
 export interface Product {
