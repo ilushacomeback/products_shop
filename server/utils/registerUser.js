@@ -1,9 +1,7 @@
-const registerUser = (user) => {
+const registerUser = (username, email, password) => {
   return `INSERT INTO users
   (username, email, password)
-  VALUES ('${user.username}', '${user.email}', '${user.password}')`;
+  VALUES ('${username}', '${email}', '${password}')`;
 };
 
-module.exports = {
-    registerUser
-}
+module.exports = registerUser

@@ -16,7 +16,7 @@ export const staticRoutes: StaticRoutes = {
   basket: '/basket',
 };
 
-const base = 'http://localhost:4000'
+const base = 'http://localhost:4000/api'
 
 export const apiRoutes: ApiRoutes = {
     baseUrl: () => base,
