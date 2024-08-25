@@ -1,16 +1,5 @@
-const { Pool } = require('pg');
 const registerUser = require('../utils/registerUser');
-
-const pool = new Pool({
-  user: 'ilya',
-  host: process.env.RENDER_HOST,
-  database: process.env.RENDER_DATABASE,
-  password: process.env.RENDER_PASSWORD,
-  port: 5432,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+const pool = require('./db-model')
 
 class UserModel {
   async getUser(dataUser) {

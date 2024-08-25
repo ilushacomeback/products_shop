@@ -19,7 +19,7 @@ export const basketApi = createApi({
       queryFn: async (arg, api, extraOptions, baseQuery) => {
         try {
           const store = api.getState() as RootState;
-          const token = store.auth.token;
+          const token = store.auth.accessToken;
           const id = store.auth.id;
           if (!token) return new Promise((resolve, reject) => reject('not token'))
           const data = await baseQuery({
@@ -39,7 +39,7 @@ export const basketApi = createApi({
       queryFn: async (basket, api, extraOptions, baseQuery) => {
         try {
           const store = api.getState() as RootState;
-          const token = store.auth.token;
+          const token = store.auth.accessToken;
           const id = store.auth.id;
           const data = await baseQuery({
             url: `/users/${id}`,

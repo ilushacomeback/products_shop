@@ -8,8 +8,8 @@ export const userApi = createApi({
     baseUrl: apiRoutes.users(),
     prepareHeaders: (headers, { getState }) => {
       const state = getState() as RootState;
-      const { token } = state.auth;
-      headers.set('Authorization', `Bearer ${token}`);
+      const { accessToken } = state.auth;
+      headers.set('Authorization', `Bearer ${accessToken}`);
       return headers;
     },
   }),

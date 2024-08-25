@@ -6,7 +6,7 @@ import { Product } from '@/shared/interfaces';
 interface InitialState {
   products: Product[];
   page: number;
-  totalPages: number;
+  // totalPages: number;
   category: string;
 }
 
@@ -24,7 +24,7 @@ interface Response {
 const initialState: InitialState = {
   products: [],
   page: 1,
-  totalPages: 1,
+  // totalPages: 1,
   category: '',
 };
 
@@ -33,7 +33,7 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     setPage: (state) => {
-      if (state.page < state.totalPages) {
+      if (state.page < 5) {
         state.page += 1;
       }
     },
@@ -55,7 +55,7 @@ const productsSlice = createSlice({
       (state, { payload }) => {
         const { items, meta } = payload as Response;
         state.products.push(...items);
-        state.totalPages = meta.total_pages;
+        // state.totalPages = meta.total_pages;
       }
     );
   },
