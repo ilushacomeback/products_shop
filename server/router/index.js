@@ -3,8 +3,14 @@ const userController = require('../controllers/user-controller');
 const productsController = require('../controllers/products-controller');
 const categoriesController = require('../controllers/categories-controller');
 const router = new Router();
+const { body } = require('express-validator');
 
-router.post('/register', userController.register);
+router.post(
+  '/register',
+  body('email').isEmail(),
+  body('password').isLength({ min: 8, max: 32 }),
+  userController.register
+);
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
