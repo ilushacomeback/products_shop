@@ -35,6 +35,7 @@ export const SignupForm = () => {
           throw new Error('Network_Error');
         }
       }
+      console.log(response)
       logIn(response.data);
       navigate(staticRoutes.home);
     } catch (e) {
