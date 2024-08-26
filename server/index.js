@@ -24,16 +24,3 @@ const start = () => {
 };
 
 start();
-
-// app.get('/', async (req, res) => {
-//   res.send('wprk wprk');
-// });
-
-// app.post('/register', async (req, res) => {
-//   await pool.query(registerUser(req.body));
-//   const newData = await pool.query(
-//     `SELECT * FROM users WHERE username='${req.body.username}'`
-//   );
-
-//   res.send(newData.rows[0]);
-// });

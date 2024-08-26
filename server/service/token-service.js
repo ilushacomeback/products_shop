@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
-const userModel = require('../models/user-model');
-const tokenModel = require('../models/token-model')
+const tokenModel = require('../models/token-model');
 const jwtConfig = require('../config/auth.config');
 
 class TokenService {
@@ -16,11 +15,15 @@ class TokenService {
   }
 
   async saveToken(userId, refreshToken) {
-    const user = await userModel.getUser({ userId });
+    const user = await tokenModel.getUser(userId);
 
     if (user) {
-      return await tokenModel.updateUserToken(refreshToken, userId);
+      const dataUser = await tokenModel.updateUserToken(refreshToken, userId);
+      return dataUser
     }
+
+    const token = await tokenModel.create(refreshToken, userId);
+    return token;
   }
 }
 

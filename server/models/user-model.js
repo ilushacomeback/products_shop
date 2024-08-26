@@ -1,4 +1,3 @@
-const registerUser = require('../utils/registerUser');
 const db = require('../config/db.config');
 
 class UserModel {
@@ -22,7 +21,10 @@ class UserModel {
 
   async addUser(username, email, hashPassword) {
     try {
-      await db.query(registerUser(username, email, hashPassword));
+      await db.query(
+        'INSERT INTO users (username, email, password) VALUES ($1::text, $2::text, $3::text)',
+        [username, email, hashPassword]
+      );
       const user = await this.getUser({ email });
       return user;
     } catch (e) {
