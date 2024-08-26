@@ -1,13 +1,15 @@
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/user-model');
+const tokenModel = require('../models/token-model')
+const jwtConfig = require('../config/auth.config');
 
 class TokenService {
   generateTokens(payload) {
-    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN, {
-      expiresIn: '30m',
+    const accessToken = jwt.sign(payload, jwtConfig.accessToken.salt, {
+      expiresIn: jwtConfig.accessToken.expired,
     });
-    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN, {
-      expiresIn: '30d',
+    const refreshToken = jwt.sign(payload, jwtConfig.refreshToken.salt, {
+      expiresIn: jwtConfig.refreshToken.expired,
     });
 
     return { accessToken, refreshToken };
@@ -17,7 +19,7 @@ class TokenService {
     const user = await userModel.getUser({ userId });
 
     if (user) {
-      return await userModel.updateUserToken(refreshToken, userId);
+      return await tokenModel.updateUserToken(refreshToken, userId);
     }
   }
 }

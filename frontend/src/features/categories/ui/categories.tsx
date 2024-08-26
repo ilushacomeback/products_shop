@@ -6,32 +6,33 @@ interface Category {
   id: number;
 }
 
+interface Categories {
+  data: Category[];
+}
+
 const Ul = styled.ul`
-  @media(max-width: 407px) {
+  @media (max-width: 407px) {
     display: none;
   }
-`
+`;
 
 export const Categories = () => {
-  const dispatch = useAppDispatch()
-  
+  const dispatch = useAppDispatch();
+
   const handleClick = (category: Category) => {
     dispatch(actions.getCategory(category.category));
   };
 
   const { CustomSubmit } = UI;
-  const { data }: { data?: Category[] } = useGetCategoriesQuery(undefined);
+  const { data }: { data?: Categories } = useGetCategoriesQuery(undefined);
 
   return !data ? (
     <div>loading...</div>
   ) : (
     <Ul>
-      {data.map((category) => (
+      {data.data.map((category) => (
         <li key={category.category}>
-          <CustomSubmit
-            color="white"
-            onClick={() => handleClick(category)}
-          >
+          <CustomSubmit color="white" onClick={() => handleClick(category)}>
             {category.category}
           </CustomSubmit>
         </li>

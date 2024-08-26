@@ -1,32 +1,33 @@
 const registerUser = require('../utils/registerUser');
-const pool = require('./db-model')
+const db = require('../config/db.config');
 
 class UserModel {
   async getUser(dataUser) {
-    if (dataUser.email) {
-      const user = await pool.query(
-        `SELECT * FROM users WHERE email='${dataUser.email}'`
-      );
+    try {
+      if (dataUser.email) {
+        const user = await db.query(
+          'SELECT * FROM users WHERE email=$1::text',
+          [dataUser.email]
+        );
+        return user && user.rows[0];
+      }
+      const user = await db.query('SELECT * FROM users WHERE id=$1', [
+        dataUser.userId,
+      ]);
       return user && user.rows[0];
+    } catch (e) {
+      console.log(e);
     }
-    const user = await pool.query(
-      `SELECT * FROM users WHERE id='${dataUser.userId}'`
-    );
-    return user && user.rows[0];
   }
 
   async addUser(username, email, hashPassword) {
-    await pool.query(registerUser(username, email, hashPassword));
-    const user = await this.getUser({ email });
-    return user;
-  }
-
-  async updateUserToken(refreshToken, userId) {
-    await pool.query(
-      `UPDATE users SET refresh_token='${refreshToken}' WHERE id=${userId}`
-    );
-    const user = await this.getUser({ userId });
-    return user;
+    try {
+      await db.query(registerUser(username, email, hashPassword));
+      const user = await this.getUser({ email });
+      return user;
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 

@@ -6,25 +6,22 @@ import { Product } from '@/shared/interfaces';
 interface InitialState {
   products: Product[];
   page: number;
-  // totalPages: number;
+  totalPages: number;
   category: string;
 }
 
 interface Response {
-  items: Product[];
+  data: Product[];
   meta: {
-    current_page: number;
-    per_page: number;
-    remaining_count: number;
-    total_items: number;
-    total_pages: number;
+    curPage: number;
+    totalPages: number;
   };
 }
 
 const initialState: InitialState = {
   products: [],
   page: 1,
-  // totalPages: 1,
+  totalPages: 1,
   category: '',
 };
 
@@ -53,9 +50,9 @@ const productsSlice = createSlice({
     builder.addMatcher(
       productsApi.endpoints.getProducts.matchFulfilled,
       (state, { payload }) => {
-        const { items, meta } = payload as Response;
-        state.products.push(...items);
-        // state.totalPages = meta.total_pages;
+        const { data, meta } = payload as Response;
+        state.products.push(...data);
+        state.totalPages = meta.totalPages;
       }
     );
   },
