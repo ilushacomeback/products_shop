@@ -2,7 +2,6 @@ const productsModel = require('../models/products-model');
 
 class ProductsService {
   async getPagination(page, limit, category) {
-    console.log('let', category)
     const count = await productsModel.getCount(category);
     const totalPages = Math.ceil(count / limit);
     const offset = (page - 1) * limit;

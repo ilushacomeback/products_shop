@@ -26,7 +26,6 @@ class ProductsModel {
           "SELECT * FROM products WHERE category=$1::text ORDER BY id LIMIT $2 OFFSET $3",
           [category, limit, offset]
         );
-        console.log(data.rows)
         return data.rows;
       } else {
         const data = await db.query(
