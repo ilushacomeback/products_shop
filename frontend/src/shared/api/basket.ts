@@ -12,7 +12,7 @@ export const basketApi = createApi({
     getBasket: builder.query({
       query: (ids) => {
         const params = ids.map((id: number) => `id[]=${id}`).join('&');
-        return `${apiRoutes.products()}?${params}`;
+        return `${apiRoutes.basket()}?${params}`;
       },
     }),
     getUserData: builder.query({
@@ -23,9 +23,10 @@ export const basketApi = createApi({
           const id = store.auth.id;
           if (!token) return new Promise((resolve, reject) => reject('not token'))
           const data = await baseQuery({
-            url: `/users/${id}`,
+            url: `/basket/${id}`,
             headers: { Authorization: `Bearer ${token}` },
           });
+          console.log('data', data)
           if (data.error) {
             throw new Error('Server Error');
           }
@@ -42,7 +43,7 @@ export const basketApi = createApi({
           const token = store.auth.accessToken;
           const id = store.auth.id;
           const data = await baseQuery({
-            url: `/users/${id}`,
+            url: `/basket/${id}`,
             method: 'PATCH',
             body: { basket },
             headers: { Authorization: `Bearer ${token}` },

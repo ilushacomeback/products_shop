@@ -1,6 +1,7 @@
 type Obj = Record<string, number>;
 
 export const syncBaskets = (obj1: Obj, obj2: Obj): Obj => {
+  console.log(obj1, obj2)
   const keys = [...Object.keys(obj1), ...Object.keys(obj2)];
   const acc: Obj = {};
 

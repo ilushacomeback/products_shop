@@ -16,7 +16,8 @@ export const useBasket = () => {
   const { data, isLoading } = useGetUserDataQuery(undefined);
 
   if (token && basketOfCookie && !isLoading) {
-    const basket = data.basket;
+    console.log(data)
+    const basket = data.data;
     const result = syncBaskets(basket, basketOfCookie);
     addProducts(result);
     document.cookie = 'basket=;max-age=0';

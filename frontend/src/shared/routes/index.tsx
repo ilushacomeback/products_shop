@@ -23,6 +23,7 @@ export const apiRoutes: ApiRoutes = {
     login: () => [base, 'login'].join('/'),
     signup: () => [base, 'register'].join('/'),
     products: () => [base, 'products'].join('/'),
+    basket: () => [base, 'basket'].join('/'),
     categories: () => [base, 'categories'].join('/'),
     users: () => [base, 'users'].join('/'),
 }

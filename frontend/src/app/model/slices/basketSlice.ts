@@ -36,15 +36,16 @@ const basketSlice = createSlice({
       .addMatcher(
         basketApi.endpoints.getUserData.matchFulfilled,
         (state, { payload }) => {
-          if (payload.basket) {
-            state.basket = payload.basket;
+          console.log(payload)
+          if (payload.data) {
+            state.basket = payload.data;
           }
         }
       )
       .addMatcher(
         basketApi.endpoints.addProductInBasket.matchFulfilled,
         (state, { payload }) => {
-          state.basket = payload.basket;
+          state.basket = payload.data;
         }
       );
   },

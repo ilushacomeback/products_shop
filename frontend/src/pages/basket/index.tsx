@@ -1,5 +1,5 @@
 import { Basket } from '@/widgets';
 
-export const Account = () => {
+export const BasketPage = () => {
   return <Basket />;
 };

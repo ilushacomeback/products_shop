@@ -14,6 +14,10 @@ interface PropsBasket {
   ButtonsOfQuantity: React.FC<{ quantity: number; id: number }>;
 }
 
+interface Products {
+  data: Product[]
+}
+
 export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   const { CustomSubmit } = UI;
   const dispatch = useAppDispatch();
@@ -37,7 +41,7 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   const {
     data: productsUser,
     isLoading,
-  }: { data?: Product[]; isLoading: boolean } = useGetBasketQuery(productsIds);
+  }: { data?: Products; isLoading: boolean } = useGetBasketQuery(productsIds);
 
   if (isLoading) {
     return <div>loading...</div>;
@@ -48,8 +52,8 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   ) : (
     <main style={{ margin: '10px' }}>
       <ul style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-        {productsUser
-          ?.filter((product) => currentBasket[product.id] > 0)
+        {productsUser?.data
+          .filter((product) => currentBasket[product.id] > 0)
           .map((product: Product) => (
             <li key={product.id} style={{ width: '200px' }}>
               <img src={product.image} alt={product.name} />
@@ -67,7 +71,7 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
       <span>
         Result:{' '}
         {`$${
-          productsUser?.reduce(
+          productsUser?.data.reduce(
             (acc, product) =>
               (acc += Number(product.price) * currentBasket[product.id]),
             0

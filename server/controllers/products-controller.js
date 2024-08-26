@@ -7,7 +7,7 @@ class ProductController {
       const category = req.query.category;
       const limit = parseInt(req.query.limit) || 10;
       const data = await productsService.getPagination(page, limit, category);
-      res.json(data);
+      return res.json(data);
     } catch (e) {
       console.log(e);
     }
