@@ -1,4 +1,4 @@
-import { useGetCategoriesQuery, UI, useAppDispatch, actions } from '@/shared';
+import { useGetCategories, UI, useAppDispatch, actions } from '@/shared';
 import styled from 'styled-components';
 
 interface Category {
@@ -24,7 +24,7 @@ export const Categories = () => {
   };
 
   const { CustomSubmit } = UI;
-  const { data }: { data?: Categories } = useGetCategoriesQuery(undefined);
+  const { data }: { data?: Categories } = useGetCategories(undefined);
 
   return !data ? (
     <div>loading...</div>

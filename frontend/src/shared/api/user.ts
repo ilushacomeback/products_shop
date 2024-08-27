@@ -8,7 +8,7 @@ export const userApi = createApi({
     baseUrl: apiRoutes.users(),
     prepareHeaders: (headers, { getState }) => {
       const state = getState() as RootState;
-      const { accessToken } = state.auth;
+      const { accessToken } = state.authState;
       headers.set('Authorization', `Bearer ${accessToken}`);
       return headers;
     },
@@ -31,6 +31,6 @@ export const userApi = createApi({
 });
 
 export const {
-  useDeleteUserMutation,
-  useUpdateInfoUserMutation,
+  useDeleteUserMutation: useDeleteUser,
+  useUpdateInfoUserMutation: useUpdateUser,
 } = userApi;

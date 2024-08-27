@@ -1,13 +1,15 @@
 import {
-  useGetBasketQuery,
+  useGetProductsForBasket,
+  useAddProductsInDB,
   Product,
   selectors,
   useAppSelector,
   useAppDispatch,
   actions,
   UI,
+  useGetBasketOfDB,
 } from '@/shared';
-import { useBasket } from '../model/useBasket';
+// import { useBasket } from '../model/useBasket';
 import React, { useEffect } from 'react';
 
 interface PropsBasket {
@@ -15,33 +17,47 @@ interface PropsBasket {
 }
 
 interface Products {
-  data: Product[]
+  data: Product[];
 }
 
 export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   const { CustomSubmit } = UI;
   const dispatch = useAppDispatch();
-  const basket = useBasket();
+
   const currentBasket = useAppSelector(
     selectors.basketSelectors.selectProducts
   );
 
   useEffect(() => {
-    if (basket) {
-      dispatch(actions.addProductsInBasket(basket));
-    }
+    // const useFetchData = () => {
+  
+    //   if (isLoading) {
+    //     console.log('Данные грузятся из БД');
+    //   } else if (!isLoading && data) {
+    //     console.log('данные из бд', data);
+    //   }
+    // }
+
+    // useFetchData()
   }, []);
+
+  console.log('cur', currentBasket);
 
   if (!currentBasket) {
     return <div>Basket empty</div>;
   }
 
+  // const [addProductsInDB] = useAddProductsInDB();
+  // const basket = useBasket();
+
   const productsIds: string[] = Object.keys(currentBasket);
+  console.log('ids',productsIds);
 
   const {
     data: productsUser,
     isLoading,
-  }: { data?: Products; isLoading: boolean } = useGetBasketQuery(productsIds);
+  }: { data?: Products; isLoading: boolean } =
+    useGetProductsForBasket(productsIds);
 
   if (isLoading) {
     return <div>loading...</div>;

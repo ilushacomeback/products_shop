@@ -30,4 +30,7 @@ export const productsApi = createApi({
   }),
 });
 
-export const { useGetProductQuery, useGetProductsQuery } = productsApi;
+export const {
+  useGetProductQuery: useGetProduct,
+  useGetProductsQuery: useGetProductsPagination,
+} = productsApi;

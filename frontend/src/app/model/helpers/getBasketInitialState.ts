@@ -10,10 +10,9 @@ export const getBasketInitialState = async (dispatch: Dispatch) => {
 
   if (user.accessToken) {
     const response = await fetch(`${apiRoutes.basket()}/${user.id}`);
-    console.log(response)
     const dataUser = await response.json();
-    console.log(dataUser);
-    dispatch(actions.addProductsInBasket(dataUser.basket));
+    console.log('data', dataUser)
+    dispatch(actions.addProductsInBasket(dataUser));
   } else {
     dispatch(actions.addProductsInBasket(getCookie('basket')));
   }

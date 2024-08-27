@@ -1,27 +1,28 @@
-import { getBasketOfCookie } from './getBasketOfCookie';
-import { syncBaskets } from './syncBaskets';
-import {
-  useAppSelector,
-  useGetUserDataQuery,
-  selectors,
-  useAddProductInBasketMutation,
-} from '@/shared';
+// import { getBasketOfCookie } from './getBasketOfCookie';
+// import { syncBaskets } from './syncBaskets';
+// import {
+//   useAppSelector,
+//   useGetBasketOfDB,
+//   selectors,
+//   useAddProductsInDB,
+// } from '@/shared';
 
-export const useBasket = () => {
-  const token: string | null = useAppSelector(
-    selectors.authSelectors.selectToken
-  );
-  const [addProducts] = useAddProductInBasketMutation();
-  const basketOfCookie = getBasketOfCookie();
-  const { data, isLoading } = useGetUserDataQuery(undefined);
+// export const useBasket = () => {
+//   const token: string | null = useAppSelector(selectors.authSelectors.selectToken);
 
-  if (token && basketOfCookie && !isLoading) {
-    console.log(data)
-    const basket = data.data;
-    const result = syncBaskets(basket, basketOfCookie);
-    addProducts(result);
-    document.cookie = 'basket=;max-age=0';
-  } else {
-    return getBasketOfCookie();
-  }
-};
+//   const [addProductsInDB] = useAddProductsInDB();
+//   const basketInCookie = getBasketOfCookie() || {};
+//   const { data, isLoading } = useGetBasketOfDB(undefined);
+//   let resultBasket = {};
+//   if (token && !isLoading) {
+//     const basketInBD = data as Record<string, number> || {};
+//     const syncBasket = syncBaskets(basketInBD, basketInCookie);
+//     resultBasket = syncBasket;
+//     addProductsInDB(syncBasket);
+//     document.cookie = 'basket=;max-age=0';
+//   } else if (basketInCookie) {
+//     resultBasket = basketInCookie;
+//   }
+//   console.log('result', resultBasket)
+//   return resultBasket
+// };

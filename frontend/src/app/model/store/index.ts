@@ -5,17 +5,17 @@ import { categoriesApi } from '@/shared/api/categories';
 import { userApi } from '@/shared/api/user';
 import { basketApi } from '@/shared/api/basket';
 import {
-  authReducer as auth,
+  authReducer as authState,
   actions as authActions,
   authSelectors,
 } from '../slices/authSlice';
 import {
-  productsReducer as products,
+  productsReducer as productsState,
   actions as productsActions,
   productsSelectors,
 } from '../slices/productsSlice';
 import {
-  basketReducer as basket,
+  basketReducer as basketState,
   actions as basketActions,
   basketSelectors
 } from '../slices/basketSlice'
@@ -33,9 +33,9 @@ export const selectors = {
 };
 
 const reducer = combineReducers({
-  auth,
-  products,
-  basket,
+  authState,
+  productsState,
+  basketState,
   [authApi.reducerPath]: authApi.reducer,
   [productsApi.reducerPath]: productsApi.reducer,
   [categoriesApi.reducerPath]: categoriesApi.reducer,

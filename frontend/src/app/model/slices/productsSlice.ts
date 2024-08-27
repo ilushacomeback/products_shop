@@ -59,9 +59,9 @@ const productsSlice = createSlice({
 });
 
 export const productsSelectors = {
-  selectProducts: (state: RootState) => state.products.products,
-  selectCurrentPage: (state: RootState) => state.products.page,
-  selectCurrentCategory: (state: RootState) => state.products.category,
+  selectProducts: (state: RootState) => state.productsState.products,
+  selectCurrentPage: (state: RootState) => state.productsState.page,
+  selectCurrentCategory: (state: RootState) => state.productsState.category,
 };
 export const productsReducer = productsSlice.reducer;
 export const { actions } = productsSlice;

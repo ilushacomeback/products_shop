@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { selectors, useAppSelector, useLoginMutation, AuthContext, UI, staticRoutes } from '@/shared';
+import { selectors, useAppSelector, useLogin, AuthContext, UI, staticRoutes } from '@/shared';
 
 interface InputsForm {
   email: string;
@@ -22,7 +22,7 @@ export const LoginForm = () => {
   const { register, handleSubmit } = useForm<InputsForm>();
   const { logIn } = useContext(AuthContext);
 
-  const [setLogin, { error }] = useLoginMutation();
+  const [setLogin, { error }] = useLogin();
 
   const onSubmit: SubmitHandler<InputsForm> = async (data) => {
     try {

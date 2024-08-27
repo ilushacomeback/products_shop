@@ -2,6 +2,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiRoutes } from '../routes/index';
 import { RootState } from '../../app/model/store';
 
+interface Basket {
+  basket: Record<string, number>;
+}
+
 export const basketApi = createApi({
   reducerPath: 'basketApi',
   baseQuery: fetchBaseQuery({
@@ -9,59 +13,65 @@ export const basketApi = createApi({
   }),
   keepUnusedDataFor: 0,
   endpoints: (builder) => ({
-    getBasket: builder.query({
+    getProducts: builder.query({
       query: (ids) => {
         const params = ids.map((id: number) => `id[]=${id}`).join('&');
         return `${apiRoutes.basket()}?${params}`;
       },
     }),
-    getUserData: builder.query({
+    getBasketDB: builder.query({
       queryFn: async (arg, api, extraOptions, baseQuery) => {
-        try {
-          const store = api.getState() as RootState;
-          const token = store.auth.accessToken;
-          const id = store.auth.id;
-          if (!token) return new Promise((resolve, reject) => reject('not token'))
-          const data = await baseQuery({
-            url: `/basket/${id}`,
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          console.log('data', data)
-          if (data.error) {
-            throw new Error('Server Error');
-          }
-          return new Promise((resolve, reject) => resolve(data));
-        } catch (error) {
-          return new Promise((resolve, reject) => reject(error));
+        const store = api.getState() as RootState;
+        const { accessToken } = store.authState;
+        const { id } = store.authState;
+        if (!accessToken) {
+          throw new Error('Unauthoraized');
         }
+        const data = await baseQuery({
+          url: `/basket/${id}`,
+          headers: { Authorization: `Bearer ${accessToken}` },
+        });
+        if (data.error) {
+          return {
+            error: {
+              status: 500,
+              statusText: 'Internal Server Error',
+              data: "Coin landed on it's edge!",
+            },
+          };
+        }
+        return data;
       },
     }),
-    addProductInBasket: builder.mutation({
+    addProductsInBasket: builder.mutation({
       queryFn: async (basket, api, extraOptions, baseQuery) => {
-        try {
-          const store = api.getState() as RootState;
-          const token = store.auth.accessToken;
-          const id = store.auth.id;
-          const data = await baseQuery({
-            url: `/basket/${id}`,
-            method: 'PATCH',
-            body: { basket },
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          if (data.error) {
-            throw new Error('Server Error');
-          }
-          return new Promise((resolve, reject) => resolve(data));
-        } catch (error) {
-          return new Promise((resolve, reject) => reject(error));
+        console.log('resBasket', basket);
+        const store = api.getState() as RootState;
+        const { accessToken } = store.authState;
+        const { id } = store.authState;
+        const data = await baseQuery({
+          url: `/basket/${id}`,
+          method: 'PATCH',
+          body: { basket },
+          headers: { Authorization: `Bearer ${accessToken}` },
+        });
+        if (data.error) {
+          return {
+            error: {
+              status: 500,
+              statusText: 'Internal Server Error',
+              data: "Coin landed on it's edge!",
+            },
+          };
         }
+        return data;
       },
     }),
   }),
 });
 
 export const {
-  useGetBasketQuery,
-  useGetUserDataQuery,
-  useAddProductInBasketMutation,
+  useGetProductsQuery: useGetProductsForBasket,
+  useGetBasketDBQuery: useGetBasketOfDB,
+  useAddProductsInBasketMutation: useAddProductsInDB,
 } = basketApi;

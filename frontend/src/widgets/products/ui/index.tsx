@@ -7,9 +7,9 @@ import {
   selectors,
   useAppDispatch,
   useAppSelector,
-  useGetProductsQuery,
+  useGetProductsPagination,
 } from '@/shared';
-import { useBasket } from '@/entities/basket/model/useBasket';
+// import { useBasket } from '@/entities/basket/model/useBasket';
 
 const Ul = styled.ul`
   display: flex;
@@ -24,18 +24,18 @@ const Ul = styled.ul`
 
 export const Products = () => {
   const dispatch = useAppDispatch();
-  const basket = useBasket();
+  // const basket = useBasket();
   const page = useAppSelector(selectors.productsSelectors.selectCurrentPage);
   const category = useAppSelector(
     selectors.productsSelectors.selectCurrentCategory
   );
-  useGetProductsQuery({ page, category });
+  useGetProductsPagination({ page, category });
   const products = useAppSelector(selectors.productsSelectors.selectProducts);
 
   useEffect(() => {
-    if (basket) {
-      dispatch(actions.addProductsInBasket(basket));
-    }
+    // if (basket) {
+    //   dispatch(actions.addProductsInBasket(basket));
+    // }
     return () => {
       dispatch(actions.resetProducts());
     };

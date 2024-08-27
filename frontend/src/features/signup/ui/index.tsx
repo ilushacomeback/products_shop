@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import {
   selectors,
   useAppSelector,
-  useSignupMutation,
+  useSignup,
   AuthContext,
   UI,
   staticRoutes,
@@ -23,7 +23,7 @@ export const SignupForm = () => {
   const { logIn } = useContext(AuthContext);
   const token = useAppSelector(selectors.authSelectors.selectToken);
 
-  const [signup, { error }] = useSignupMutation();
+  const [signup, { error }] = useSignup();
 
   const onSubmit: SubmitHandler<InputsForm> = async (data: InputsForm) => {
     try {
