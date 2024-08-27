@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { RootState } from '@/app/model/store/index';
 import { basketApi } from '@/shared/api/basket';
 import { normalizeData } from '../helpers/normalizeData';
@@ -24,7 +24,8 @@ const basketSlice = createSlice({
     },
     addProductsInBasket: (state, { payload }) => {
       console.log('add', payload);
-      const basket = typeof payload === 'string' ? JSON.parse(payload) : payload;
+      const basket =
+        typeof payload === 'string' ? JSON.parse(payload) : payload;
       state.basket = basket;
     },
     removeProductInBasket: (state, { payload }) => {
@@ -41,9 +42,9 @@ const basketSlice = createSlice({
         (state, { payload }) => {
           console.log('payload', payload);
           if (payload) {
-            const data = normalizeData(payload)
+            const data = normalizeData(payload);
             state.basket = syncBaskets(data, getBasketOfCookie());
-            document.cookie = 'basket=;max-age=0';
+            console.log('stateBasket',current(state))
           }
         }
       )
@@ -51,8 +52,12 @@ const basketSlice = createSlice({
         basketApi.endpoints.addProductsInBasket.matchFulfilled,
         (state, { payload }) => {
           console.log('newProdust', payload);
-          const data = normalizeData(payload)
-          state.basket = data;
+          console.log('state', current(state))
+          const data = normalizeData(payload);
+          state.basket = syncBaskets(data, getBasketOfCookie());
+          console.log('data',data)
+          console.log('clear cookies')
+          document.cookie = 'basket=;max-age=0';
         }
       );
   },

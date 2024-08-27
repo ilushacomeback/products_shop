@@ -1,10 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiRoutes } from '../routes/index';
 import { RootState } from '../../app/model/store';
-
-interface Basket {
-  basket: Record<string, number>;
-}
+import { syncBaskets } from '@/app/model/helpers/syncBaskets';
+import { getBasketOfCookie } from '@/entities/basket/model/getBasketOfCookie';
 
 export const basketApi = createApi({
   reducerPath: 'basketApi',
@@ -44,7 +42,8 @@ export const basketApi = createApi({
       },
     }),
     addProductsInBasket: builder.mutation({
-      queryFn: async (basket, api, extraOptions, baseQuery) => {
+      queryFn: async (basketDB, api, extraOptions, baseQuery) => {
+        const basket = syncBaskets(basketDB, getBasketOfCookie());
         console.log('resBasket', basket);
         const store = api.getState() as RootState;
         const { accessToken } = store.authState;

@@ -16,10 +16,5 @@ export const useAddProduct = () => {
   return !isAuth
     ? (id: number, side?: string) => useAddGuestProduct(dispatch, id, side)
     : (id: number, side?: string) =>
-        useAddUserProduct(
-          addProduct,
-          products,
-          String(id),
-          side
-        );
+        useAddUserProduct(addProduct, products, String(id), side);
 };

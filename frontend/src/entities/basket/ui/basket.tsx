@@ -1,15 +1,10 @@
 import {
   useGetProductsForBasket,
-  useAddProductsInDB,
   Product,
   selectors,
   useAppSelector,
-  useAppDispatch,
-  actions,
   UI,
-  useGetBasketOfDB,
 } from '@/shared';
-// import { useBasket } from '../model/useBasket';
 import React, { useEffect } from 'react';
 
 interface PropsBasket {
@@ -22,36 +17,17 @@ interface Products {
 
 export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   const { CustomSubmit } = UI;
-  const dispatch = useAppDispatch();
 
   const currentBasket = useAppSelector(
     selectors.basketSelectors.selectProducts
   );
 
-  useEffect(() => {
-    // const useFetchData = () => {
-  
-    //   if (isLoading) {
-    //     console.log('Данные грузятся из БД');
-    //   } else if (!isLoading && data) {
-    //     console.log('данные из бд', data);
-    //   }
-    // }
-
-    // useFetchData()
-  }, []);
-
-  console.log('cur', currentBasket);
-
   if (!currentBasket) {
     return <div>Basket empty</div>;
   }
-
-  // const [addProductsInDB] = useAddProductsInDB();
-  // const basket = useBasket();
+  console.log('curBasket', currentBasket)
 
   const productsIds: string[] = Object.keys(currentBasket);
-  console.log('ids',productsIds);
 
   const {
     data: productsUser,
@@ -62,6 +38,8 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   if (isLoading) {
     return <div>loading...</div>;
   }
+
+  console.log('products',productsUser)
 
   return productsIds.length === 0 && !isLoading ? (
     <div>Basket empty</div>
