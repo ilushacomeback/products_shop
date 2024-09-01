@@ -7,14 +7,16 @@ import {
 import { useAddGuestProduct } from './useAddGuestProduct';
 import { useAddUserProduct } from './useAddUserProduct';
 
-export const useAddProduct = () => {
+export const useAddProduct = (): [(id: number, side?: string) => void, boolean] => {
   const dispatch = useAppDispatch();
-  const [addProduct] = useAddProductsInDB();
+  const [addProduct, { isLoading }] = useAddProductsInDB();
   const isAuth = !!useAppSelector(selectors.authSelectors.selectToken);
   const products = useAppSelector(selectors.basketSelectors.selectProducts);
 
-  return !isAuth
+  const resultFunctionForAddProduct = !isAuth
     ? (id: number, side?: string) => useAddGuestProduct(dispatch, id, side)
     : (id: number, side?: string) =>
         useAddUserProduct(addProduct, products, String(id), side);
+
+  return [resultFunctionForAddProduct, isLoading];
 };

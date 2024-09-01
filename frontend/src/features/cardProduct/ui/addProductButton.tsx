@@ -11,8 +11,14 @@ export const AddProductButton = ({ id }: { id: number }) => {
   const products = useAppSelector(selectors.basketSelectors.selectProducts);
   const navigate = useNavigate();
   const { CustomSubmit } = UI;
-  const addProduct = useAddProduct();
+  const [addProduct, isLoading] = useAddProduct();
+
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+
   const textBtn = products && products[id] ? State.InBasket : State.OutBasket;
+
   if (textBtn === State.InBasket) {
     return (
       <CustomSubmit onClick={() => navigate(staticRoutes.basket)} color="red">
@@ -20,5 +26,5 @@ export const AddProductButton = ({ id }: { id: number }) => {
       </CustomSubmit>
     );
   }
-  return <CustomSubmit onClick={() => addProduct(id)}>{textBtn}</CustomSubmit>
+  return <CustomSubmit onClick={() => addProduct(id)}>{textBtn}</CustomSubmit>;
 };

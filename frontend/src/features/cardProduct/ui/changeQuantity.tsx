@@ -16,7 +16,7 @@ const ButtonDelete = styled.button`
   border-radius: 6px;
   background-color: red;
   font-size: 0.9rem;
-`
+`;
 
 interface PropsButtonsOfQuantity {
   quantity: number;
@@ -24,13 +24,31 @@ interface PropsButtonsOfQuantity {
 }
 
 export const ButtonsOfQuantity = (props: PropsButtonsOfQuantity) => {
-  const addProduct = useAddProduct();
+  const [addProduct, isLoading] = useAddProduct();
+
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+
   return (
-    <div style={{ display: 'flex', gap: '5px', alignItems: 'center', textAlign: 'center'}}>
-      <ButtonQuantity onClick={() => addProduct(props.id, 'minus')}>-</ButtonQuantity>
+    <div
+      style={{
+        display: 'flex',
+        gap: '5px',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <ButtonQuantity onClick={() => addProduct(props.id, 'minus')}>
+        -
+      </ButtonQuantity>
       <span>{props.quantity}</span>
-      <ButtonQuantity onClick={() => addProduct(props.id, 'plus')}>+</ButtonQuantity>
-      <ButtonDelete onClick={() => addProduct(props.id, 'remove')}>delete</ButtonDelete>
+      <ButtonQuantity onClick={() => addProduct(props.id, 'plus')}>
+        +
+      </ButtonQuantity>
+      <ButtonDelete onClick={() => addProduct(props.id, 'remove')}>
+        delete
+      </ButtonDelete>
     </div>
   );
 };
