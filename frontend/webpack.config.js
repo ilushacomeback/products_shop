@@ -53,7 +53,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
-        type: mode === 'production' ? 'asser' : 'assert/resource',
+        type: mode === 'production' ? 'assert' : 'assert/resource',
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/i,

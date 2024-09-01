@@ -9,7 +9,7 @@ export const basketApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: apiRoutes.baseUrl(),
   }),
-  keepUnusedDataFor: 0,
+  tagTypes: ['basket'],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: (ids) => {
@@ -19,12 +19,15 @@ export const basketApi = createApi({
     }),
     getBasketDB: builder.query({
       queryFn: async (arg, api, extraOptions, baseQuery) => {
+        console.log('старт взятие из бд', performance.now());
         const store = api.getState() as RootState;
         const { accessToken } = store.authState;
         const { id } = store.authState;
-        if (!accessToken) {
-          throw new Error('Unauthoraized');
+
+        if (!accessToken || !id) {
+          throw new Error('незареган');
         }
+
         const data = await baseQuery({
           url: `/basket/${id}`,
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -38,16 +41,23 @@ export const basketApi = createApi({
             },
           };
         }
+        console.log('финиш взятие из бд', performance.now());
         return data;
       },
+      providesTags: ['basket'],
     }),
     addProductsInBasket: builder.mutation({
       queryFn: async (basketDB, api, extraOptions, baseQuery) => {
+        console.log('старт добавления в бд', performance.now());
         const basket = syncBaskets(basketDB, getBasketOfCookie());
-        console.log('resBasket', basket);
         const store = api.getState() as RootState;
         const { accessToken } = store.authState;
         const { id } = store.authState;
+
+        if (!accessToken || !id) {
+          throw new Error('незареган');
+        }
+        
         const data = await baseQuery({
           url: `/basket/${id}`,
           method: 'PATCH',
@@ -63,8 +73,10 @@ export const basketApi = createApi({
             },
           };
         }
+        console.log('финиш добавления в бд', performance.now());
         return data;
       },
+      invalidatesTags: ['basket'],
     }),
   }),
 });

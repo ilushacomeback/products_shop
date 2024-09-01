@@ -3,8 +3,10 @@ import { ButtonsOfQuantity } from '@/features';
 import { useGetBasketOfDB } from '@/shared';
 
 export const Basket = () => {
-  const { data, isLoading } = useGetBasketOfDB(undefined);
+  console.log('tut')
+  const { data, isLoading, status } = useGetBasketOfDB(undefined);
+  console.log('status', status)
   if (isLoading) return <div>данные грузятся</div>
-  console.log('basketData', data)
+  console.log('данные из бд в корзине', data)
   return <BasketEntities ButtonsOfQuantity={ButtonsOfQuantity} />;
 };

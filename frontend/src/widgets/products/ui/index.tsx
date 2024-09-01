@@ -32,10 +32,10 @@ export const Products = () => {
 
   useEffect(() => {
     if (data && !isLoading) {
-      console.log('cookies',data );
+      console.log('данные из бд',data );
       addProductsInDB(data);
     }
-  }, [data, isLoading]);
+  }, [data]);
 
   const page = useAppSelector(selectors.productsSelectors.selectCurrentPage);
   const category = useAppSelector(

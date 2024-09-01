@@ -25,7 +25,7 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   if (!currentBasket) {
     return <div>Basket empty</div>;
   }
-  console.log('curBasket', currentBasket)
+  console.log('то что в стейте корзины', currentBasket)
 
   const productsIds: string[] = Object.keys(currentBasket);
 
@@ -38,8 +38,6 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   if (isLoading) {
     return <div>loading...</div>;
   }
-
-  console.log('products',productsUser)
 
   return productsIds.length === 0 && !isLoading ? (
     <div>Basket empty</div>

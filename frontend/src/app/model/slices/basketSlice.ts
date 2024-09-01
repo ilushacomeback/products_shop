@@ -40,24 +40,21 @@ const basketSlice = createSlice({
       .addMatcher(
         basketApi.endpoints.getBasketDB.matchFulfilled,
         (state, { payload }) => {
-          console.log('payload', payload);
           if (payload) {
             const data = normalizeData(payload);
-            state.basket = syncBaskets(data, getBasketOfCookie());
-            console.log('stateBasket',current(state))
+            console.log('ответ из бд после взятия корзины', data);
+            state.basket = data;
           }
         }
       )
       .addMatcher(
         basketApi.endpoints.addProductsInBasket.matchFulfilled,
         (state, { payload }) => {
-          console.log('newProdust', payload);
-          console.log('state', current(state))
           const data = normalizeData(payload);
-          state.basket = syncBaskets(data, getBasketOfCookie());
-          console.log('data',data)
-          console.log('clear cookies')
+          console.log('ответ из бд после добавления', data);
+          state.basket = data;
           document.cookie = 'basket=;max-age=0';
+          console.log('clear cookie')
         }
       );
   },

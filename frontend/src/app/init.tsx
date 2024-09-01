@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles/index.css';
 import { Provider } from 'react-redux';
 import { RouterProvider } from './providers/route/index';
 import { AuthProvider } from '@/shared/index';
