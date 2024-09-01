@@ -5,7 +5,7 @@ import {
   useAppSelector,
   UI,
 } from '@/shared';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 interface PropsBasket {
   ButtonsOfQuantity: React.FC<{ quantity: number; id: number }>;

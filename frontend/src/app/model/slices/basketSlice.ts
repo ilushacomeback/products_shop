@@ -1,9 +1,7 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@/app/model/store/index';
 import { basketApi } from '@/shared/api/basket';
 import { normalizeData } from '../helpers/normalizeData';
-import { getBasketOfCookie } from '@/entities/basket/model/getBasketOfCookie';
-import { syncBaskets } from '../helpers/syncBaskets';
 
 interface Basket {
   basket: Record<string, number>;

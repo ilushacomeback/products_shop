@@ -11,8 +11,6 @@ import {
   useGetBasketOfDB,
   useAddProductsInDB,
 } from '@/shared';
-import { getBasketOfCookie } from '@/entities/basket/model/getBasketOfCookie';
-// import { useBasket } from '@/entities/basket/model/useBasket';
 
 const Ul = styled.ul`
   display: flex;
@@ -32,7 +30,6 @@ export const Products = () => {
 
   useEffect(() => {
     if (data && !isLoading) {
-      console.log('данные из бд',data );
       addProductsInDB(data);
     }
   }, [data]);
