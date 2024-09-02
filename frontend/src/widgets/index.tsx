@@ -1,6 +1,6 @@
-export { Navbar } from './navbar/ui/index'
+export { Navbar } from './navbar/ui/navbar'
 export { Authentication } from './login/ui/index'
 export { Footer } from './footer/ui/index'
 export { Registration } from './signup/ui/index'
-export { Products } from './products/ui/index'
+export { Products } from './products/ui/products'
 export { Basket } from './basket/ui/basket'

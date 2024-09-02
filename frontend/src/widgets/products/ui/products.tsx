@@ -38,7 +38,7 @@ export const Products = () => {
   const category = useAppSelector(
     selectors.productsSelectors.selectCurrentCategory
   );
-  useGetProductsPagination({ page, category });
+  const { isLoading: isLoadPagination} = useGetProductsPagination({ page, category });
   const products = useAppSelector(selectors.productsSelectors.selectProducts);
 
   useEffect(() => {
@@ -47,8 +47,12 @@ export const Products = () => {
     };
   }, []);
 
-  return !products ? (
-    <div>loading...</div>
+  if (isLoadPagination) {
+    return <div>loading...</div>;
+  }
+
+  return products.length === 0 ? (
+    <div>Ничего не найдено</div>
   ) : (
     <Ul>
       {products.map((product, i) => (

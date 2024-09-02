@@ -7,9 +7,16 @@ import {
   ResponsiveMenuItem,
   MenuItem,
 } from '../styled-component/index';
-import { useAppSelector, selectors, useAppDispatch, actions, staticRoutes } from '@/shared';
+import {
+  useAppSelector,
+  selectors,
+  useAppDispatch,
+  actions,
+  staticRoutes,
+} from '@/shared';
 import { AuthContext } from '@/shared';
 import { SearchProducts } from '@/features';
+import { useLocation } from 'react-router-dom';
 
 const ButtonsForGuest = () => {
   return (
@@ -26,12 +33,12 @@ const ButtonsForGuest = () => {
 
 const ButtonsForUser = () => {
   const { logOut } = useContext(AuthContext);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleExit = () => {
-    dispatch(actions.addProductsInBasket({}))
-    logOut()
-  }
+    dispatch(actions.addProductsInBasket({}));
+    logOut();
+  };
 
   return (
     <>
@@ -50,12 +57,13 @@ const NavbarRight = ({ token }: { token: boolean }) => {
 
 export const Navbar = () => {
   const token: boolean = !!useAppSelector(selectors.authSelectors.selectToken);
+  const location = useLocation();
 
   return (
     <header>
       <NavbarContainer className="nav-container">
         <Logo>MyLogo</Logo>
-        <SearchProducts />
+        {location.pathname === staticRoutes.home && <SearchProducts />}
         <Menu>
           <ResponsiveMenuItem>
             <NavLink to={staticRoutes.home}>Home</NavLink>

@@ -16,7 +16,9 @@ class ProductsService {
   }
 
   async searchProducts(name) {
-    const data = await productsModel.getSearchProducts(name)
+
+    const normalizeName = name[0] ? name[0].toUpperCase() + name.slice(1) : ''
+    const data = await productsModel.getSearchProducts(normalizeName)
     return data
   }
 }
