@@ -1,4 +1,4 @@
-import { useGetCategories, UI, useAppDispatch, actions } from '@/shared';
+import { useGetCategories, UI, useAppDispatch, actions, useAppSelector, selectors } from '@/shared';
 import styled from 'styled-components';
 
 interface Category {
@@ -22,9 +22,18 @@ export const Categories = () => {
   const handleClick = (category: Category) => {
     dispatch(actions.getCategory(category.category));
   };
+  const currentCategory = useAppSelector(selectors.productsSelectors.selectCurrentCategory)
 
   const { CustomSubmit } = UI;
   const { data }: { data?: Categories } = useGetCategories(undefined);
+
+  const getColor = (category: string) => {
+    if ((category === 'all' && currentCategory === '') || category === currentCategory) {
+      return 'red'
+    } else {
+      return 'white'
+    }
+  }
 
   return !data ? (
     <div>loading...</div>
@@ -32,7 +41,7 @@ export const Categories = () => {
     <Ul>
       {data.data.map((category) => (
         <li key={category.category}>
-          <CustomSubmit color="white" onClick={() => handleClick(category)}>
+          <CustomSubmit color={getColor(category.category)} onClick={() => handleClick(category)}>
             {category.category}
           </CustomSubmit>
         </li>

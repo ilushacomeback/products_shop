@@ -66,7 +66,8 @@ const productsSlice = createSlice({
         searchApi.endpoints.searchProducts.matchFulfilled,
         (state, { payload }) => {
           state.products = payload;
-          console.log('search');
+          state.page = 1;
+          state.category = '';
           state.isLazy = false;
         }
       );
