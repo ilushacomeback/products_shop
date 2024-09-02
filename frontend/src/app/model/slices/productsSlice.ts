@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { productsApi } from '@/shared/api/products';
+import { searchApi } from '@/shared/api/search';
 import { RootState } from '@/app/model/store/index';
 import { Product } from '@/shared/interfaces';
 
@@ -8,6 +9,7 @@ interface InitialState {
   page: number;
   totalPages: number;
   category: string;
+  isLazy: boolean;
 }
 
 interface Response {
@@ -23,6 +25,7 @@ const initialState: InitialState = {
   page: 1,
   totalPages: 1,
   category: '',
+  isLazy: true,
 };
 
 const productsSlice = createSlice({
@@ -36,6 +39,7 @@ const productsSlice = createSlice({
     },
     getCategory: (state, { payload }) => {
       if (payload === state.category) return;
+      state.isLazy = true;
       state.products = [];
       state.page = 1;
       state.category = payload === 'all' ? '' : payload;
@@ -44,17 +48,28 @@ const productsSlice = createSlice({
       state.products = [];
       state.page = 1;
       state.category = '';
+      state.isLazy = true;
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      productsApi.endpoints.getProducts.matchFulfilled,
-      (state, { payload }) => {
-        const { data, meta } = payload as Response;
-        state.products.push(...data);
-        state.totalPages = meta.totalPages;
-      }
-    );
+    builder
+      .addMatcher(
+        productsApi.endpoints.getProducts.matchFulfilled,
+        (state, { payload }) => {
+          const { data, meta } = payload as Response;
+          if (!state.isLazy) return;
+          state.products.push(...data);
+          state.totalPages = meta.totalPages;
+        }
+      )
+      .addMatcher(
+        searchApi.endpoints.searchProducts.matchFulfilled,
+        (state, { payload }) => {
+          state.products = payload;
+          console.log('search');
+          state.isLazy = false;
+        }
+      );
   },
 });
 
@@ -62,6 +77,7 @@ export const productsSelectors = {
   selectProducts: (state: RootState) => state.productsState.products,
   selectCurrentPage: (state: RootState) => state.productsState.page,
   selectCurrentCategory: (state: RootState) => state.productsState.category,
+  selectLazy: (state: RootState) => state.productsState.isLazy,
 };
 export const productsReducer = productsSlice.reducer;
 export const { actions } = productsSlice;

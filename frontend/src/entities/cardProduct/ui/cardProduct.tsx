@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { useLazy, Product } from '@/shared';
+import { useLazy, Product, selectors } from '@/shared';
+import { useSelector } from 'react-redux';
 
 interface ProductProps {
   product: Product;
@@ -32,14 +33,15 @@ export const CardProduct = ({
   const { name, price, image, id } = product;
   const trackedItem = useRef(null);
   const { lazy, optionsObserver } = useLazy();
+  const isLazy = useSelector(selectors.productsSelectors.selectLazy)
 
   const observer = new IntersectionObserver(lazy, optionsObserver);
 
   useEffect(() => {
-    if (trackedItem.current) {
+    if (trackedItem.current && isLazy) {
       observer.observe(trackedItem.current);
     }
-  }, []);
+  }, [isLazy]);
 
   return (
     <Li {...(isLast ? { ref: trackedItem } : {})}>

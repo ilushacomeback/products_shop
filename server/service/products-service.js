@@ -14,6 +14,11 @@ class ProductsService {
       },
     };
   }
+
+  async searchProducts(name) {
+    const data = await productsModel.getSearchProducts(name)
+    return data
+  }
 }
 
 module.exports = new ProductsService();

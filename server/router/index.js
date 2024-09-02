@@ -17,6 +17,7 @@ router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
 router.get('/users', userController.getUsers);
 router.get('/products', productsController.getPaginationProducts);
+router.post('/search', productsController.searchProducts);
 router.get('/categories', categoriesController.getCategories);
 router.get('/basket', basketController.getProductsForBasket);
 router.get('/basket/:id', basketController.getBasket);

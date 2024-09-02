@@ -8,7 +8,6 @@ class BasketService {
 
   async getBasket(id) {
     const userBasket = await basketModel.getBasket(id);
-
     if (userBasket) {
       const data = JSON.parse(userBasket);
       return data;

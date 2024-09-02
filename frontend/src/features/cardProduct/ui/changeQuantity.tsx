@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useAddProduct } from '../model/addProduct';
+import { useAddProduct } from '../model/useAddProduct';
 
 const ButtonQuantity = styled.button`
   width: 20px;

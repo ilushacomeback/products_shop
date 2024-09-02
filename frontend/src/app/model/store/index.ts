@@ -4,6 +4,7 @@ import { productsApi } from '@/shared/api/products';
 import { categoriesApi } from '@/shared/api/categories';
 import { userApi } from '@/shared/api/user';
 import { basketApi } from '@/shared/api/basket';
+import { searchApi } from '@/shared/api/search';
 import {
   authReducer as authState,
   actions as authActions,
@@ -41,6 +42,7 @@ const reducer = combineReducers({
   [categoriesApi.reducerPath]: categoriesApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
   [basketApi.reducerPath]: basketApi.reducer,
+  [searchApi.reducerPath]: searchApi.reducer,
 });
 
 export const store = configureStore({
@@ -52,6 +54,7 @@ export const store = configureStore({
       categoriesApi.middleware,
       userApi.middleware,
       basketApi.middleware,
+      searchApi.middleware,
     ]),
 });
 

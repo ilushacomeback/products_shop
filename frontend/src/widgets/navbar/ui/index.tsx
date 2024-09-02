@@ -9,6 +9,7 @@ import {
 } from '../styled-component/index';
 import { useAppSelector, selectors, useAppDispatch, actions, staticRoutes } from '@/shared';
 import { AuthContext } from '@/shared';
+import { SearchProducts } from '@/features';
 
 const ButtonsForGuest = () => {
   return (
@@ -54,6 +55,7 @@ export const Navbar = () => {
     <header>
       <NavbarContainer className="nav-container">
         <Logo>MyLogo</Logo>
+        <SearchProducts />
         <Menu>
           <ResponsiveMenuItem>
             <NavLink to={staticRoutes.home}>Home</NavLink>

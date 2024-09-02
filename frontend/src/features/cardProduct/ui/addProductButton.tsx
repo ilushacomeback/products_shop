@@ -1,5 +1,5 @@
 import { UI, selectors, staticRoutes, useAppSelector } from '@/shared';
-import { useAddProduct } from '../model/addProduct';
+import { useAddProduct } from '../model/useAddProduct';
 import { useNavigate } from 'react-router-dom';
 
 enum State {

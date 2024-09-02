@@ -25,7 +25,6 @@ export const Basket = ({ ButtonsOfQuantity }: PropsBasket) => {
   if (!currentBasket) {
     return <div>Basket empty</div>;
   }
-  console.log('то что в стейте корзины', currentBasket)
 
   const productsIds: string[] = Object.keys(currentBasket);
 

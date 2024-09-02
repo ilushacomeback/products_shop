@@ -25,7 +25,7 @@ class BasketModel {
     const basketUser = await db.query('SELECT * FROM baskets WHERE id=$1', [
       id,
     ]);
-    return basketUser.rows[0].basket;
+    return basketUser.rows[0] && basketUser.rows[0].basket;
   }
 }
 
